@@ -52,6 +52,16 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
       });
     });
 
+    vscode.window.onDidChangeActiveTextEditor((e) => {
+      const fileName = e?.document?.fileName;
+      if (fileName) {
+        this._view.webview.postMessage({
+          type: "onActiveTextEditor",
+          value: fileName
+        })
+      }
+    })
+
     // Event listener that triggers whenever the user saves a document
     vscode.workspace.onDidSaveTextDocument((document) => {
       // Edge case that avoids sending messages to the webview when there is no tree currently populated
@@ -90,7 +100,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           }
           // Open and the show the user the file they want to see
           const doc = await vscode.workspace.openTextDocument(data.value);
-          const editor = await vscode.window.showTextDocument(doc, {preserveFocus: false, preview: false});
+          const editor = await vscode.window.showTextDocument(doc, { preserveFocus: false, preview: false });
           break;
         }
 
@@ -125,20 +135,6 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           );
           break;
         }
-
-        // Message sent to the webview to bold the active file
-        case "onBoldCheck": {
-          // Check there is an activeText Editor
-          const fileName = vscode.window.activeTextEditor ? vscode.window.activeTextEditor.document.fileName: null;
-          // Message sent to the webview to bold the active file
-          if (fileName) {
-            this._view.webview.postMessage({
-              type: "current-tab",
-              value: fileName
-            });
-          }
-          break;
-        }
       }
     });
   }
@@ -148,7 +144,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     let fileName;
     // If status menu button clicked, no uri, get active file uri
     if (!uri) {
-      fileName  = vscode.window.activeTextEditor.document.fileName;
+      fileName = vscode.window.activeTextEditor.document.fileName;
     } else {
       fileName = uri.path;
     }
@@ -215,7 +211,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           <link href="${styleMainUri}" rel="stylesheet">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script nonce="${nonce}">
-          const tsvscode = acquireVsCodeApi();
+          const vscodeApi = acquireVsCodeApi();
         </script>
 			</head>
       <body>

@@ -149,7 +149,7 @@ export class SaplingParser {
     }
 
     // Create abstract syntax tree of current component tree file
-    let ast: babelParser.ParseResult<File>;
+    let ast
     try {
       ast = babelParser.parse(fs.readFileSync(path.resolve(componentTree.filePath), 'utf-8'), {
         sourceType: 'module',

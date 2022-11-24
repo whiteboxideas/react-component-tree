@@ -1,9 +1,8 @@
 import * as _vscode from "vscode";
+import { WebviewApi } from "vscode-webview";
 
 declare global {
-  const tsvscode: {
-    postMessage: ({ type: string, value: any }) => void;
-  };
+  const vscodeApi: WebviewApi<unknown>
 }
 
-export default tsvscode;
+export default vscodeApi;

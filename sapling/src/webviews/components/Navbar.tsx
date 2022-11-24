@@ -13,7 +13,7 @@ const Navbar = ({ rootFile }: any) => {
     // Reset event target value to null so the same file selection causes onChange event to trigger
     e.target.value = null;
     if (filePath) {
-      tsvscode.postMessage({
+      vscodeApi.postMessage({
         type: "onFile",
         value: filePath
       });

@@ -88,7 +88,7 @@
   clip: rect(0, 0, 0, 0);
   }
 
-.tree_beginning input ~ ul { display: none; }
+/* .tree_beginning input ~ ul { display: none; } */
 
 .tree_beginning input:checked ~ ul { display: block; }
 
