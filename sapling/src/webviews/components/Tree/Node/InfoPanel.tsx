@@ -27,16 +27,6 @@ const InfoPanel: React.FC<IProps> = ({
         });
     };
 
-    // Function that will capture the file path of the current node clicked on + send a message to the extension
-    const viewFile = () => {
-        // Edge case to verify that there is in fact a file path for the current node
-        // if (node.filePath) {
-        //     vscodeApi.postMessage({
-        //         type: "onViewFile",
-        //         value: node.filePath
-        //     });
-        // }
-    };
     // Variable that holds the props that will be fed into the tooltip (Tippy)
     const propsList = propsGenerator();
 
@@ -51,8 +41,6 @@ const InfoPanel: React.FC<IProps> = ({
             <Tippy content={<p><strong>Props</strong>{propsList}</p>}>
                 <span className="node_icons" ><FontAwesomeIcon icon={faInfoCircle} /></span>
             </Tippy>
-            <span className="node_icons" onClick={viewFile}><FontAwesomeIcon icon={faArrowCircleRight} /></span>
-
         </>
     );
 };

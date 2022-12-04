@@ -14,7 +14,8 @@ const Node: React.FC<ListChildComponentProps<INode[]>> = ({
 }) => {
     const node = data[index];
 
-    const toggleNode = () => {
+    const toggleNode = (e) => {
+        e.stopPropagation();
         renderProvider.toggleNode(node);
     };
 
@@ -22,9 +23,21 @@ const Node: React.FC<ListChildComponentProps<INode[]>> = ({
     const indentationStyle: React.CSSProperties = {
         paddingLeft
     }
+
+      // Function that will capture the file path of the current node clicked on + send a message to the extension
+      const viewFile = () => {
+        // Edge case to verify that there is in fact a file path for the current node
+        if (node.filePath) {
+            vscodeApi.postMessage({
+                type: "onViewFile",
+                value: node.filePath
+            });
+        }
+    };
+
     return (
         <div style={style} >
-            <div className='node' style={indentationStyle}>
+            <div onClick={viewFile} className='node' style={indentationStyle}>
                 {node.children.length ? <FontAwesomeIcon className='expand-toggle' icon={node.expanded ? faChevronDown : faChevronRight} onClick={toggleNode} /> : null}
                 <InfoPanel node={node}></InfoPanel>
             <span className='node-label'>{node.name}</span>

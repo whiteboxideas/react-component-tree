@@ -97,5 +97,7 @@ export default class RenderProvider {
 - search 
 - check if flow is performant 
 - implement line connectors
-- persist context data 
+- persist context data - done
+- highlight active tab
+- navigate to file on click
  */
