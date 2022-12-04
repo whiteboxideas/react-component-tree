@@ -1,14 +1,19 @@
 import * as React from 'react';
-import './searchbar.css';
+import { DispatchContext, StateContext } from '../pages/sidebar';
 
-interface IProps {
-    value: string;
-    onChange: (value: string) => void
-}
-const SearchBar: React.FC<IProps> = ({ value, onChange }: IProps) => {
+const SearchBar: React.FC = () => {
+    const { search } = React.useContext(StateContext);
+    const dispatch = React.useContext(DispatchContext);
+
+    const onChange = (value)=>{
+        dispatch({
+            type:"UPDATE_SEARCH",
+            payload:value
+        })
+    }
     return (
         <div className='search-bar'>
-            <input ></input>
+            <input placeholder='Search' value={search} onChange={(e) => onChange(e.target.value)} ></input>
         </div>
     )
 };

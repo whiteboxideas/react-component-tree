@@ -43,15 +43,6 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
       });
     });
 
-    // Event listener that triggers whenever the user changes their current active window
-    vscode.window.onDidChangeActiveTextEditor((e) => {
-      // Post a message to the webview with the file path of the user's current active window
-      webviewView.webview.postMessage({
-        type: "current-tab",
-        value: e ? e.document.fileName : undefined
-      });
-    });
-
     vscode.window.onDidChangeActiveTextEditor((e) => {
       const fileName = e?.document?.fileName;
       if (fileName) {
