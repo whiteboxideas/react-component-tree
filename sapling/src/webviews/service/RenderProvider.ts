@@ -9,6 +9,7 @@ export default class RenderProvider {
     expandCollapseConfig: TExpandCollapse = {};
     filePathMap: Map<string, INode> = new Map();
     dispatch;
+    searchString: string = '';
 
     constructor() {
         window.addEventListener('message', (event) => {
@@ -39,18 +40,38 @@ export default class RenderProvider {
     }
 
     populateData(nodes: INode[]) {
-        nodes.forEach(node => {
-            const expanded = !!node?.children?.length && this.isRowExpanded(node);
-            if (node) {
-                const processedNode = this.getProcessedNode(node, expanded);
-                this.data.push(processedNode);
-                this.filePathMap.set(processedNode.filePath, processedNode);
-            }
+        const { searchString } = this;
+        handler(nodes);
+        function handler (nodes: INode[]) {
+            return nodes.forEach(node => {
+                const expanded = !!node?.children?.length && this.isRowExpanded(node);
+                if (node) {
+                    const processedNode = this.getProcessedNode(node, expanded);
+                    if (expanded) {
+                        processedNode.children = handler(node.children);
+                    }
+                    if(!processedNode.children?.length) {
+                        // ignore node if it doesn't match the search string 
+                        if(satisfiesSearch(processedNode)) {
+                            this.data.push(processedNode);
+                            this.filePathMap.set(processedNode.filePath, processedNode);
+                        }
+                    } else {
+                        // Add node anyways
+                        this.data.push(processedNode);
+                        this.filePathMap.set(processedNode.filePath, processedNode);
+                    }
+                }
+            });
+        }
 
-            if (expanded) {
-                this.populateData(node.children);
+        function satisfiesSearch(node) {
+            if (node.children?.length || !searchString) {
+                return true
+            } else {
+                return node.name.toLocaleLowerCase().includes(searchString);
             }
-        });
+        }
     }
 
     getProcessedNode(node: any, expanded: boolean) {
@@ -77,6 +98,11 @@ export default class RenderProvider {
             [node.id]: !node.expanded
         };
         this.updateNodes();
+    }
+
+    search(searchString: string) {
+        this.searchString = searchString;
+        this.parseNodes();
     }
 
     updateNodes() {
