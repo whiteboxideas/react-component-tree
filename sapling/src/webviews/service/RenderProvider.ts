@@ -39,27 +39,29 @@ export default class RenderProvider {
         return this.data;
     }
 
-    populateData(nodes: INode[]) {
-        const { searchString } = this;
+    populateData = (nodes: INode[]) => {
+        const { searchString, isRowExpanded, getProcessedNode } = this;
+        const { data, filePathMap } = this;
+        console.log(data)
         handler(nodes);
         function handler (nodes: INode[]) {
             return nodes.forEach(node => {
-                const expanded = !!node?.children?.length && this.isRowExpanded(node);
+                const expanded = !!node?.children?.length && isRowExpanded(node);
                 if (node) {
-                    const processedNode = this.getProcessedNode(node, expanded);
+                    const processedNode = getProcessedNode(node, expanded);
                     if (expanded) {
                         processedNode.children = handler(node.children);
                     }
                     if(!processedNode.children?.length) {
                         // ignore node if it doesn't match the search string 
                         if(satisfiesSearch(processedNode)) {
-                            this.data.push(processedNode);
-                            this.filePathMap.set(processedNode.filePath, processedNode);
+                            data.push(processedNode);
+                            filePathMap.set(processedNode.filePath, processedNode);
                         }
                     } else {
                         // Add node anyways
-                        this.data.push(processedNode);
-                        this.filePathMap.set(processedNode.filePath, processedNode);
+                        data.push(processedNode);
+                        filePathMap.set(processedNode.filePath, processedNode);
                     }
                 }
             });
@@ -74,16 +76,21 @@ export default class RenderProvider {
         }
     }
 
-    getProcessedNode(node: any, expanded: boolean) {
+    getProcessedNode = (node: any, expanded: boolean) =>  {
         return {
             ...node,
             level: node.depth,
             index: this.data.length,
-            expanded
+            expanded,
+            children: []
         }
     }
 
-    isRowExpanded(node: any): boolean {
+    isRowExpanded=(node: any): boolean => {
+        const { searchString } = this
+        if(searchString) {
+            return true;
+        }
         if (node.id in this.expandCollapseConfig) {
             return this.expandCollapseConfig[node.id];
         } else if (node.depth === 0) {
