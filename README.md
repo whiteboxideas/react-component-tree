@@ -3,7 +3,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/oslabs-beta/sapling">
-    <img src="sapling/media/sapling-logo.png" alt="Logo" height="120">
+    <img src="sapling/media/logo.png" alt="Logo" height="120">
   </a>
 
   <h3 align="center">Sapling</h3>

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import logo from '../public/sapling-logo.png';
+import logo from '../public/logo.png';
 import vscodeLogo from '../public/vscode-logo.png'
 
 const Jumbotron = () => {

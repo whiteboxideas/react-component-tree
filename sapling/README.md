@@ -5,7 +5,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/oslabs-beta/sapling">
-    <img src="media/sapling-logo.png" alt="Logo" height="120">
+    <img src="media/logo.png" alt="Logo" height="120">
   </a>
 
   <h2 align="center">Sapling</h2>

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import logo from '../public/sapling-logo.png';
+import logo from '../public/logo.png';
 
 const Navbar = () => {
   return (
