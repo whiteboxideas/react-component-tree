@@ -3,45 +3,26 @@
 
 <!-- PROJECT LOGO -->
 <br />
+This project is forked from https://github.com/oslabs-beta/sapling but it seems the project is dead, we have made a lot of core performance improvements
+and will continue to add new features. 
 <p align="center">
-  <a href="https://github.com/oslabs-beta/sapling">
+  <a href="https://github.com/hb1998/react-component-tree">
     <img src="media/logo.png" alt="Logo" height="120">
   </a>
 
-  <h2 align="center">Sapling</h2>
+  <h2 align="center">React component tree</h2>
 
   <p align="center">
     A convenient way to traverse your React application.
     <br />
-    <a href="https://github.com/oslabs-beta/sapling"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/hb1998/react-component-tree"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/oslabs-beta/sapling/issues">Report Bug</a>
+    <a href="https://github.com/hb1998/react-component-tree/issues">Report Bug</a>
     ·
-    <a href="https://github.com/oslabs-beta/sapling/issues">Request Feature</a>
+    <a href="https://github.com/hb1998/react-component-tree/issues">Request Feature</a>
   </p>
-    <!-- BADGES -->
-  <p align="center">
-     <!-- VSCode Version -->
-    <a href="https://marketplace.visualstudio.com/items?itemName=team-sapling.sapling"><img alt="Visual Studio Marketplace Version" src="https://img.shields.io/visual-studio-marketplace/v/team-sapling.sapling?label=Version"></a>
-    <!-- VSCode Installs -->
-    <a href="https://marketplace.visualstudio.com/items?itemName=team-sapling.sapling"><img alt="Visual Studio Marketplace Installs" src="https://img.shields.io/visual-studio-marketplace/i/team-sapling.sapling?label=Installs&logo=visualstudiocode"></a>
-    <!-- STARS -->
-    <a href="https://github.com/oslabs-beta/sapling/stargazers"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/oslabs-beta/sapling?label=Stars&logo=github"></a>
-    <!-- FORKS -->
-    <a href="https://github.com/oslabs-beta/sapling/network/members"><img alt="GitHub forks" src="https://img.shields.io/github/forks/oslabs-beta/sapling?label=Forks&logo=github"></a>
-    <!-- GITHUB RELEASE VERSION -->
-    <!-- <a href="https://github.com/oslabs-beta/sapling/releases"><img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/oslabs-beta/sapling?include_prereleases"></a> -->
-    <br>
-    <!-- BUILD STATUS -->
-    <!-- <a href="https://github.com/oslabs-beta/sapling/actions/workflows/master.yml"><img alt="master CI/CD workflow status" src="https://github.com/oslabs-beta/sapling/actions/workflows/master.yml/badge.svg"></a>
-    <a href="https://github.com/oslabs-beta/sapling/actions/workflows/dev.yml"><img alt="dev CI workflow status" src="https://github.com/oslabs-beta/sapling/actions/workflows/dev.yml/badge.svg"></a>
-    <img alt="GitHub deployments" src="https://img.shields.io/github/deployments/oslabs-beta/sapling/production?label=website%20build&logo=vercel"> -->
-    <!-- LICENSE -->
-    <!-- <a href="https://github.com/oslabs-beta/sapling/blob/master/LICENSE"><img alt="GitHub" src="https://img.shields.io/github/license/oslabs-beta/sapling"></a> -->
-    <!-- CONTRIBUTIONS -->
-    <!-- <a href="https://github.com/oslabs-beta/sapling/blob/master/README.md"><img alt="Contributions" src="https://img.shields.io/badge/contributors-welcome-brightgreen"></a> -->
-  </p>
+  
 </p>
 
 <hr>
@@ -78,9 +59,9 @@
 </p>
 <br/>
 
-Sapling is a VS Code extension built with React developers in mind. As your codebase grows, your native file structure becomes less and less intuitive. Wouldn't it be nice to have a file structure that represents the actual relationships between the components and containers in your application? Wouldn't you like a quick reference to your available props, and an indication of routes and conditional rendering?
+React component tree is a VS Code extension built with React developers in mind. As your codebase grows, your native file structure becomes less and less intuitive. Wouldn't it be nice to have a file structure that represents the actual relationships between the components and containers in your application? Wouldn't you like a quick reference to your available props, and an indication of routes and conditional rendering?
 
-With Sapling, you don't have to guess at the parent component of your current file. Sapling is an interactive hierarchical dependency tree that lives directly within your VS Code IDE, as accessible as the native file system. You can build your tree by selecting any component file as the root and get information about the available props at any level. It also provides visual indication of Javascript syntax or import errors in your files, and shows you which components are connected to your Redux store.
+With React component tree, you don't have to guess at the parent component of your current file. React component tree is an interactive hierarchical dependency tree that lives directly within your VS Code IDE, as accessible as the native file system. You can build your tree by selecting any component file as the root and get information about the available props at any level. It also provides visual indication of Javascript syntax or import errors in your files, and shows you which components are connected to your Redux store.
 
 
 ### Built With
@@ -114,9 +95,9 @@ Installing from VS Code Extension Marketplace:
 
 1. If needed, install Visual Studio Code for Windows (7+), macOS (Sierra+), or Linux (details).
 
-2. Install the Sapling extension for Visual Studio Code. Search for 'sapling' in the VS Code extensions tab, or click [here](https://marketplace.visualstudio.com/items?itemName=team-sapling.sapling).
+2. Install the React component tree extension for Visual Studio Code. Search for 'sapling' in the VS Code extensions tab, or click [here](https://marketplace.visualstudio.com/items?itemName=team-sapling.sapling).
 
-3. Once complete, you'll see Sapling appear in your sidebar. You can now begin using Sapling! Check out the Getting Started below for information on how to get started.
+3. Once complete, you'll see React component tree appear in your sidebar. You can now begin using React component tree! Check out the Getting Started below for information on how to get started.
 
 To install sapling for development, please see the contributing section below.
 
@@ -130,9 +111,9 @@ To install sapling for development, please see the contributing section below.
 
 ## Usage
 
-After installing, click the Sapling tree icon in your extension sidebar (image of icon here). From there, you can either click "Choose a file" to select your root component, or build your tree directly from a file open in your editor with the "Build Tree" button on the right hand side of your status bar. Click the + and - buttons to expand and collapse subsets of your tree, and hover over the information icon (image of icon here) to get a list of props available to that component. You can also press the view file icon (image of icon here) to open the file where the component is defined in your editor window. Below is a quick-reference legend for icon and text format meanings. If you prefer not to view React Router or other third-party components imported to your app, you can disable either of these in the VS Code Extension Settings.
+After installing, click the React component tree tree icon in your extension sidebar (image of icon here). From there, you can either click "Choose a file" to select your root component, or build your tree directly from a file open in your editor with the "Build Tree" button on the right hand side of your status bar. Click the + and - buttons to expand and collapse subsets of your tree, and hover over the information icon (image of icon here) to get a list of props available to that component. You can also press the view file icon (image of icon here) to open the file where the component is defined in your editor window. Below is a quick-reference legend for icon and text format meanings. If you prefer not to view React Router or other third-party components imported to your app, you can disable either of these in the VS Code Extension Settings.
 
-Icon Legend in Sapling Tree View:
+Icon Legend in React component tree Tree View:
 <ul>
   <li>
     <img height="14" src="media/circle-info-solid.png">  available props (hover)
@@ -151,9 +132,9 @@ Icon Legend in Sapling Tree View:
   </li>
 </ul>
 
-Sapling can currently display React apps made with JSX/TSX and ES6 import syntax.
+React component tree can currently display React apps made with JSX/TSX and ES6 import syntax.
 
-Sapling will detect React components invoked using JSX tag syntax and React-Router component syntax, where React is imported in a file:
+React component tree will detect React components invoked using JSX tag syntax and React-Router component syntax, where React is imported in a file:
 
 ```JSX
     // Navbar will be detected as a child of the current file
@@ -169,14 +150,14 @@ Sapling will detect React components invoked using JSX tag syntax and React-Rout
     <Route children={App} />
 ```
 
-Sapling will detect the names of inline props for JSX components it identifies:
+React component tree will detect the names of inline props for JSX components it identifies:
 
 ```JSX
-    // props 'userId' and 'userName' will be listed for Navbar in Sapling
+    // props 'userId' and 'userName' will be listed for Navbar in React component tree
     <Navbar userId={...} userName={...} />
 ```
 
-Sapling can identify components connected to the Redux store, when 'connect' is imported from 'react-redux', and the component is the export default of the file:
+React component tree can identify components connected to the Redux store, when 'connect' is imported from 'react-redux', and the component is the export default of the file:
 
 ```JSX
     // App.jsx
@@ -190,12 +171,12 @@ Sapling can identify components connected to the Redux store, when 'connect' is 
       return <h1>This is the App</h1>
     }
 
-    // Sapling will detect App as connected to the Redux store
+    // React component tree will detect App as connected to the Redux store
     export default connect(mapStateToProps, mapDispatchToProps)(App);
 ```
 
 ### Note
-Sapling prioritizes file dependencies over component dependencies. Consider the following JSX contained in the file App.jsx:
+React component tree prioritizes file dependencies over component dependencies. Consider the following JSX contained in the file App.jsx:
 
 ```JSX
     // App.jsx
@@ -214,7 +195,7 @@ Sapling prioritizes file dependencies over component dependencies. Consider the 
     }
 ```
 
-Sapling will display Home and Navbar as siblings, both children of App: (image of actual Sapling here)
+React component tree will display Home and Navbar as siblings, both children of App: (image of actual React component tree here)
 
 <br />
   <img src="media/readme-example.png">
@@ -228,20 +209,17 @@ This extension contributes the following settings:
 
 ## License
 
-Distributed under the MIT License. See [`LICENSE`](https://github.com/oslabs-beta/sapling/blob/master/LICENSE) for more information.
+Distributed under the MIT License. See [`LICENSE`](https://github.com/hb1998/react-component-tree/blob/master/LICENSE) for more information.
 
 ## Creators
 
+* [Habeeb](https://github.com/hb1998)
+* [Arul Valan](https://github.com/ArulValan)
 * [Charles Gutwirth](https://github.com/charlesgutwirth)
 * [Jordan Hisel](https://github.com/jo-cella)
 * [Lindsay Baird](https://github.com/labaird)
 * [Paul Coster](https://github.com/PLCoster)
 
-## Contact
-
-<img height="14" src="media/twitter-logo.png">  Twitter: [@TeamSapling](https://twitter.com/teamsapling) | Email: saplingextension@gmail.com
-
-<img height="14" src="media/github-icon.png">  GitHub: [https://github.com/oslabs-beta/sapling/](https://github.com/oslabs-beta/sapling/)
 
 ## Acknowledgements
 * Parsing Strategy inspired by [React Component Hierarchy](https://www.npmjs.com/package/react-component-hierarchy)
@@ -249,5 +227,5 @@ Distributed under the MIT License. See [`LICENSE`](https://github.com/oslabs-bet
 * Icons from [Font Awesome](https://fontawesome.com)
 * Tooltips with [Tippy](https://www.npmjs.com/package/@tippy.js/react)
 * [Best README Template](https://github.com/othneildrew/Best-README-Template)
-* Sapling Logo from [Freepik](https://www.freepik.com/vectors/tree)
+* React component tree Logo from [Freepik](https://www.freepik.com/vectors/tree)
 * Readme badges from [shields.io](https://shields.io/)
