@@ -41,7 +41,6 @@ export default class RenderProvider {
 
     filterData = (nodes: INode[]) => {
         const { searchString, getProcessedNode } = this;
-        console.log('--------DEBugger');
         return handler(nodes);
         function handler(nodes: INode[]) {
             return nodes.reduce((acc: INode[], node) => {
@@ -78,7 +77,6 @@ export default class RenderProvider {
         return {
             ...node,
             level: node.depth,
-            index: this.data.length,
             expanded: this.isRowExpanded(node),
             children: []
         };
@@ -88,6 +86,7 @@ export default class RenderProvider {
         nodes.forEach(node => {
             const hasChildren = !!node?.children?.length;
             if (node) {
+                node.index = this.data.length;
                 this.data.push(node);
                 this.filePathMap.set(node.filePath, node);
             }

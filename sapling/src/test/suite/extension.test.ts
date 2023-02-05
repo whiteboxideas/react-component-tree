@@ -12,7 +12,7 @@ suite('Extension Test Suite', () => {
 	describe('Sapling loads correctly', () => {
     let saplingExtension;
     before (() => {
-      saplingExtension = vscode.extensions.getExtension('team-sapling.sapling');
+      saplingExtension = vscode.extensions.getExtension('Habeeb-Arul.react-component-tree');
     });
 
     test('Sapling is registered as an extension', () => {

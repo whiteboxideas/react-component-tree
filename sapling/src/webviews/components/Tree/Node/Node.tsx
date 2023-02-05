@@ -23,7 +23,6 @@ const Node: React.FC<ListChildComponentProps<INode[]>> = ({
     const indentationStyle: React.CSSProperties = {
         paddingLeft
     }
-    console.log(node)
       // Function that will capture the file path of the current node clicked on + send a message to the extension
       const viewFile = () => {
         // Edge case to verify that there is in fact a file path for the current node

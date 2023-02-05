@@ -32,7 +32,6 @@ function reducer(state, action) {
             }
         }
         case 'UPDATE_DATA': {
-            console.log('update',action.payload)
             return {
                 ...state,
                 rows: action.payload

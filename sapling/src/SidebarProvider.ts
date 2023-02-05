@@ -15,7 +15,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     this.context = context;
     this._extensionUri = context.extensionUri;
     // Check for sapling state in workspace and set tree with previous state
-    const state: Tree | undefined = context.workspaceState.get('sapling');
+    const state: Tree | undefined = context.workspaceState.get('react-component-tree');
     if (state) {
       this.parser = new SaplingParser(state.filePath);
       this.parser.setTree(state);
@@ -35,7 +35,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     // Event listener that triggers any moment that the user changes his/her settings preferences
     vscode.workspace.onDidChangeConfiguration((e) => {
       // Get the current settings specifications the user selects
-      const settings = vscode.workspace.getConfiguration('sapling');
+      const settings = vscode.workspace.getConfiguration('react-component-tree');
       // Send a message back to the webview with the data on settings
       webviewView.webview.postMessage({
         type: "settings-data",
@@ -108,7 +108,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         // Case to retrieve the user's settings
         case "onSettingsAcquire": {
           // use getConfiguration to check what the current settings are for the user
-          const settings = await vscode.workspace.getConfiguration('sapling');
+          const settings = await vscode.workspace.getConfiguration('react-component-tree');
           // send a message back to the webview with the data on settings
           webviewView.webview.postMessage({
             type: "settings-data",
@@ -121,7 +121,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         case "onNodeToggle": {
           // let the parser know that the specific node clicked changed it's expanded value, save in state
           this.context.workspaceState.update(
-            'sapling',
+            'react-component-tree',
             this.parser.toggleNode(data.value.id, data.value.expanded)
           );
           break;
@@ -157,7 +157,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
   private updateView() {
     // Save current state of tree to workspace state:
     const tree = this.parser.getTree();
-    this.context.workspaceState.update('sapling', tree);
+    this.context.workspaceState.update('react-component-tree', tree);
     // Send updated tree to webview
     this._view.webview.postMessage({
       type: "parsed-data",
