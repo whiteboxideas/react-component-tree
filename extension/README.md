@@ -7,7 +7,7 @@ This project is forked from https://github.com/oslabs-beta/sapling but it seems 
 and will continue to add new features. 
 <p align="center">
   <a href="https://github.com/hb1998/react-component-tree">
-    <img src="media/logo.png" alt="Logo" height="120">
+    <img src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/logo.png" alt="Logo" height="120">
   </a>
 
   <h2 align="center">React component tree</h2>
@@ -55,7 +55,7 @@ and will continue to add new features.
 
 <br/>
 <p align="center">
-  <img width="900" src="media/quizwall_demo.gif">
+  <img width="900" src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/quizwall_demo.gif">
 </p>
 <br/>
 
@@ -67,25 +67,25 @@ With React component tree, you don't have to guess at the parent component of yo
 ### Built With
 <ul>
   <li>
-    <img height="14" src="media/react-brands.png"><a href="https://reactjs.org/"> React</a>
+    <img height="14" src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/react-brands.png"><a href="https://reactjs.org/"> React</a>
   </li>
   <li>
-    <img height="14" src="media/vscode.png"><a href="https://code.visualstudio.com/api"> VSCode Extension API</a>
+    <img height="14" src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/vscode.png"><a href="https://code.visualstudio.com/api"> VSCode Extension API</a>
   </li>
   <li>
-    <img height="14" src="media/mochajs-icon.png"><a href="https://mochajs.org/"> Mocha</a>
+    <img height="14" src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/mochajs-icon.png"><a href="https://mochajs.org/"> Mocha</a>
   </li>
   <li>
-    <img height="14" src="media/chai_icon.png"><a href="https://www.chaijs.com/"> Chai</a>
+    <img height="14" src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/chai_icon.png"><a href="https://www.chaijs.com/"> Chai</a>
   </li>
   <li>
-    <img height="14" src="media/babel-logo-minimal.png"><a href="https://babeljs.io/docs/en/babel-parser"> Babel Parser</a>
+    <img height="14" src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/babel-logo-minimal.png"><a href="https://babeljs.io/docs/en/babel-parser"> Babel Parser</a>
   </li>
   <li>
-    <img height="14" src="media/webpack.png"><a href="https://webpack.js.org/"> Webpack</a>
+    <img height="14" src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/webpack.png"><a href="https://webpack.js.org/"> Webpack</a>
   </li>
   <li>
-    <img height="14" src="media/github-actions.png"><a href="https://github.com/features/actions"> GitHub Actions</a>
+    <img height="14" src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/github-actions.png"><a href="https://github.com/features/actions"> GitHub Actions</a>
   </li>
 </ul>
 
@@ -116,13 +116,13 @@ After installing, click the React component tree tree icon in your extension sid
 Icon Legend in React component tree Tree View:
 <ul>
   <li>
-    <img height="14" src="media/circle-info-solid.png">  available props (hover)
+    <img height="14" src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/circle-info-solid.png">  available props (hover)
   </li>
   <li>
-    <img height="14" src="media/circle-arrow-right-solid.png" >  open file (click)
+    <img height="14" src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/circle-arrow-right-solid.png" >  open file (click)
   </li>
   <li>
-    <img height="14" src="media/store-solid.png" >  Redux store connection
+    <img height="14" src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/store-solid.png" >  Redux store connection
   </li>
   <li>
     <span color="red">Navbar</span>  error in file (matches the error color of your theme)
@@ -198,7 +198,7 @@ React component tree prioritizes file dependencies over component dependencies. 
 React component tree will display Home and Navbar as siblings, both children of App: (image of actual React component tree here)
 
 <br />
-  <img src="media/readme-example.png">
+  <img src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/readme-example.png">
 
 ## Extension Settings
 
