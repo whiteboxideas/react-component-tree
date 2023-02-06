@@ -1,4 +1,4 @@
-<!-- SAPLING README -->
+<!-- React Component Tree README -->
 <!-- NOTE: this README is the one that shows inside VSCode extension marketplace -->
 
 <!-- PROJECT LOGO -->
@@ -84,9 +84,6 @@ With React component tree, you don't have to guess at the parent component of yo
   <li>
     <img height="14" src="extension/media/webpack.png"><a href="https://webpack.js.org/"> Webpack</a>
   </li>
-  <li>
-    <img height="14" src="extension/media/github-actions.png"><a href="https://github.com/features/actions"> GitHub Actions</a>
-  </li>
 </ul>
 
 ## Installation
@@ -95,11 +92,11 @@ Installing from VS Code Extension Marketplace:
 
 1. If needed, install Visual Studio Code for Windows (7+), macOS (Sierra+), or Linux (details).
 
-2. Install the React component tree extension for Visual Studio Code. Search for 'sapling' in the VS Code extensions tab, or click [here](https://marketplace.visualstudio.com/items?itemName=team-sapling.sapling).
+2. Install the React component tree extension for Visual Studio Code. Search for 'React Component Tree' in the VS Code extensions tab, or click [here](https://marketplace.visualstudio.com/items?itemName=HabeebArul.react-component-tree).
 
 3. Once complete, you'll see React component tree appear in your sidebar. You can now begin using React component tree! Check out the Getting Started below for information on how to get started.
 
-To install sapling for development, please see the contributing section below.
+To install React component tree for development, please see the contributing section below.
 
 ## Getting Started
 
@@ -200,12 +197,23 @@ React component tree will display Home and Navbar as siblings, both children of 
 <br />
   <img src="extension/media/readme-example.png">
 
+### Contributor Usage
+
+1. Download/clone the project from [Github](https://github.com/hb1998/react-component-tree)
+2. Open the 'react-component-tree/extension' folder in your VS Code IDE.
+2. Open extension/src/extension.ts
+3. To view the webview, in your terminal navigate into the 'extension' folder and run the following command: `npm run watch`
+4. Press F5. A new VSCode window will open with the React Component Tree Extension.
+5. Click the React Component Tree icon on the left to see the React Component Tree sidebar.
+
+Note: `Ctrl+R` (or `Cmd+R` on Mac) will refresh the extension development host
+
 ## Extension Settings
 
 This extension contributes the following settings:
 
-* `sapling.view.reactRouter`: enable/disable React Router component nodes
-* `sapling.view.thirdParty`: enable/disable all third party component nodes
+* `rct.view.reactRouter`: enable/disable React Router component nodes
+* `rct.view.thirdParty`: enable/disable all third party component nodes
 
 ## License
 

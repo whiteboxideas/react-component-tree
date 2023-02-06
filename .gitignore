@@ -105,10 +105,10 @@ dist
 
 
 # VSCode files
-sapling/out
-sapling/dist
-sapling/node_modules
-sapling/.vscode-test/
+extension/out
+extensiong/dist
+extension/node_modules
+extension/.vscode-test/
 *.vsix
 
 # Package-Lock files:
