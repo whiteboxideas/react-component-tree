@@ -5,7 +5,7 @@
 	"repository": "https://github.com/hb1998/react-component-tree",
 	"icon": "media/logo-128px.png",
 	"publisher": "HabeebArul",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"engines": {
 		"vscode": "^1.60.0"
 	},
