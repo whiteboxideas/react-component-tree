@@ -1,17 +1,20 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { FixedSizeList } from 'react-window';
-import { renderProvider, StateContext } from '../../pages/sidebar';
+import { DispatchContext, renderProvider, StateContext } from '../../pages/sidebar';
 import { INode } from '../../Tree';
 import Node from './Node/Node';
 
 interface IProps {
 }
 const Tree: React.FC<IProps> = () => {
-
-    const height = document.body.clientHeight;
+    
+    const header = 85;
+    const height = document.body.clientHeight - header;
     const width = document.body.clientWidth - 10;
 
     const { rows } = useContext(StateContext);
+    const dispatch = useContext(DispatchContext);
+
     const listRef: React.LegacyRef<FixedSizeList<INode[]>> = useRef(null);
 
     useEffect(() => {
@@ -22,10 +25,14 @@ const Tree: React.FC<IProps> = () => {
                 const node = renderProvider.filePathMap.get(message.value);
                 if (node) {
                     listRef.current?.scrollToItem(node.index, "smart");
+                        dispatch({
+                            type: "UPDATE_ACTIVE_NODE",
+                            payload: node.id
+                        });
                 }
             }
-        })
-    }, [])
+        });
+    }, []);
 
     return (<FixedSizeList
         ref={listRef}
@@ -59,6 +66,6 @@ const findNodeId = (filePath: string, nodes: any[]) => {
         }
 
     }
-}
+};
 
 export default Tree;

@@ -29,13 +29,19 @@ function reducer(state, action) {
             return {
                 ...state,
                 search: action.payload
-            }
+            };
         }
         case 'UPDATE_DATA': {
             return {
                 ...state,
                 rows: action.payload
-            }
+            };
+        }
+        case 'UPDATE_ACTIVE_NODE': {
+            return {
+                ...state,
+                activeNode: action.payload
+            };
         }
         default: {
             throw Error('Unknown action: ' + action.type);

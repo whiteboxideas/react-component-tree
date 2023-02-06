@@ -2,6 +2,10 @@ import { INode, IRawNode, Tree } from "../Tree";
 
 type TExpandCollapse = Record<string, boolean>;
 
+interface ISettings {
+    thirdParty: boolean;
+    reactRouter: boolean;
+}
 export default class RenderProvider {
 
     rawTree: INode;
@@ -9,6 +13,10 @@ export default class RenderProvider {
     expandCollapseConfig: TExpandCollapse = {};
     filePathMap: Map<string, INode> = new Map();
     dispatch;
+    settings: ISettings = {
+        reactRouter: false,
+        thirdParty: false
+    };
     searchString: string = '';
 
     constructor() {
@@ -24,6 +32,10 @@ export default class RenderProvider {
                 }
 
                 case ("settings-data"): {
+                    if (this.hasChanged(this.settings, event.data.value)) {
+                        this.settings = event.data.value;
+                        this.updateNodes();
+                    }
                     break;
                 }
 
@@ -39,13 +51,17 @@ export default class RenderProvider {
         this.flattenData(result);
     }
 
+    /**
+     * filters the nodes wch doesent match the search string, or if thirdParty needs to be ignored
+     * @param nodes 
+     */
     filterData = (nodes: INode[]) => {
-        const { searchString, getProcessedNode } = this;
+        const { searchString, settings, getProcessedNode } = this;
         return handler(nodes);
         function handler(nodes: INode[]) {
             return nodes.reduce((acc: INode[], node) => {
                 const hasChildren = !!node?.children?.length;
-                if (node) {
+                if (isNodeElligible(node)) {
                     const processedNode = getProcessedNode(node);
                     if (hasChildren) {
                         processedNode.children = handler(node.children);
@@ -64,12 +80,19 @@ export default class RenderProvider {
             }, []);
         }
 
-        function satisfiesSearch(node) {
+        function satisfiesSearch(node: INode) {
             if (node.children?.length || !searchString) {
                 return true;
             } else {
                 return node.name.toLowerCase().includes(searchString.toLowerCase());
             }
+        }
+
+        function isNodeElligible(node: INode) {
+            if (!settings.thirdParty) {
+                return !node.thirdParty;
+            }
+            return true;
         }
     };
 
@@ -125,6 +148,10 @@ export default class RenderProvider {
             type: "UPDATE_DATA",
             payload: this.data
         });
+    };
+
+    hasChanged(conf1: Record<string, any>, conf2: Record<string, any>) {
+        return JSON.stringify(conf1) !== JSON.stringify(conf2);
     }
 
 

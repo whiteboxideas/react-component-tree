@@ -35,7 +35,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     // Event listener that triggers any moment that the user changes his/her settings preferences
     vscode.workspace.onDidChangeConfiguration((e) => {
       // Get the current settings specifications the user selects
-      const settings = vscode.workspace.getConfiguration('react-component-tree');
+      const settings = vscode.workspace.getConfiguration('rct');
       // Send a message back to the webview with the data on settings
       webviewView.webview.postMessage({
         type: "settings-data",
@@ -108,7 +108,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         // Case to retrieve the user's settings
         case "onSettingsAcquire": {
           // use getConfiguration to check what the current settings are for the user
-          const settings = await vscode.workspace.getConfiguration('react-component-tree');
+          const settings = await vscode.workspace.getConfiguration('rct');
           // send a message back to the webview with the data on settings
           webviewView.webview.postMessage({
             type: "settings-data",
@@ -121,7 +121,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         case "onNodeToggle": {
           // let the parser know that the specific node clicked changed it's expanded value, save in state
           this.context.workspaceState.update(
-            'react-component-tree',
+            'rct',
             this.parser.toggleNode(data.value.id, data.value.expanded)
           );
           break;

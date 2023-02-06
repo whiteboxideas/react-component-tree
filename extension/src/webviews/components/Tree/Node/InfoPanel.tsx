@@ -30,7 +30,6 @@ const InfoPanel: React.FC<IProps> = ({
     // Variable that holds the props that will be fed into the tooltip (Tippy)
     const propsList = propsGenerator();
 
-    {/* Checks to make sure there are no thirdParty or reactRouter node_icons */ }
     return (
         <>
             {node.redux ?
