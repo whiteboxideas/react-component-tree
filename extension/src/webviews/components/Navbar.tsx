@@ -50,10 +50,10 @@ const Navbar = ({ rootFile }: any) => {
       </label>
       <div className='expand-collapse-buttons'>
         <span>
-          <FontAwesomeIcon icon={faExpandAlt} onClick={expandAll} />
+          <FontAwesomeIcon title="Expand All" icon={faExpandAlt} onClick={expandAll} />
         </span>
         <span>
-          <FontAwesomeIcon icon={faCompressAlt} onClick={collapseAll}/>
+          <FontAwesomeIcon title="Collapse All" icon={faCompressAlt} onClick={collapseAll}/>
         </span>
       </div>
     </div>
