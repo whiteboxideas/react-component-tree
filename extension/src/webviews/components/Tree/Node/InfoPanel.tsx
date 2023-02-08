@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 
 // imports for the icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStore, faInfoCircle, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { faStore, faInfoCircle, } from '@fortawesome/free-solid-svg-icons';
 // imports for the tooltip
 import Tippy from '@tippy.js/react';
 import 'tippy.js/dist/tippy.css';

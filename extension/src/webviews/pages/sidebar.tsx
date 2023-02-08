@@ -3,44 +3,47 @@ import * as ReactDOM from 'react-dom';
 import Sidebar from '../components/Sidebar';
 import '../../../media/styles.css';
 import RenderProvider from '../service/RenderProvider';
-import { INode } from '../Tree';
+import { ACTIONS } from '../actions';
+import { IAction, RootState } from '../../types/StoreTypes'
 
 export const renderProvider = new RenderProvider();
-
-export interface RootState {
-    search: string;
-    rows: INode[];
-    activeNode: string
-}
 
 const initialState: RootState = {
     search: '',
     rows: [],
     activeNode: null,
+    focussedNode: null,
 };
 
 
 const StateContext = React.createContext<RootState>(null);
 const DispatchContext = React.createContext<any>(null);
 
-function reducer(state, action) {
+function reducer(state: RootState, action: IAction): RootState {
     switch (action.type) {
-        case 'UPDATE_SEARCH': {
+        case ACTIONS.UPDATE_SEARCH: {
             return {
                 ...state,
                 search: action.payload
             };
         }
-        case 'UPDATE_DATA': {
+        case ACTIONS.UPDATE_DATA: {
             return {
                 ...state,
                 rows: action.payload
             };
         }
-        case 'UPDATE_ACTIVE_NODE': {
+        case ACTIONS.UPDATE_ACTIVE_NODE: {
             return {
                 ...state,
-                activeNode: action.payload
+                activeNode: action.payload,
+                focussedNode: action.payload
+            };
+        }
+        case ACTIONS.UPDATE_FOCUSSED_NODE: {
+            return {
+                ...state,
+                focussedNode: action.payload
             };
         }
         default: {

@@ -1,3 +1,4 @@
+import { ACTIONS } from "../actions";
 import { INode, IRawNode, Tree } from "../Tree";
 
 type TExpandCollapse = Record<string, boolean>;
@@ -18,6 +19,7 @@ export default class RenderProvider {
     data: INode[] = [];
     expandCollapseConfig: TExpandCollapse = {};
     filePathMap: Map<string, INode> = new Map();
+    rowMap: Map<string, INode> = new Map();
     dispatch;
     settings: ISettings = {
         reactRouter: false,
@@ -55,8 +57,11 @@ export default class RenderProvider {
     parseNodes(rawTree: INode = this.rawTree) {
         this.rawTree = rawTree;
         this.data = [];
+        this.filePathMap = new Map();
+        this.rowMap = new Map();
         const result = this.filterData([this.rawTree]);
         this.flattenData(result);
+        console.log(result)
     }
 
     /**
@@ -120,6 +125,7 @@ export default class RenderProvider {
                 node.index = this.data.length;
                 this.data.push(node);
                 this.filePathMap.set(node.filePath, node);
+                this.rowMap.set(node.id, node);
             }
 
             if (hasChildren && node?.expanded) {
@@ -133,7 +139,7 @@ export default class RenderProvider {
             return this.expandCollapseConfig[node.id];
         } else if (node.depth === 0) {
             return true;
-        } else if(this.gridExpandedState !== null) {
+        } else if (this.gridExpandedState !== null) {
             return this.gridExpandedState === ExpandedState.EXPANDED ? true : false;
         }
         return false;
@@ -162,7 +168,7 @@ export default class RenderProvider {
     updateNodes = () => {
         this.parseNodes();
         this.dispatch({
-            type: "UPDATE_DATA",
+            type: ACTIONS.UPDATE_DATA,
             payload: this.data
         });
     };

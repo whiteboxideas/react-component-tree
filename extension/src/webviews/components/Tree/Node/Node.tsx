@@ -1,10 +1,12 @@
+import React, { useContext, useRef } from 'react'
 import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext } from 'react'
+import classNames from 'classnames';
 import { ListChildComponentProps } from 'react-window'
 import { DispatchContext, renderProvider, StateContext } from '../../../pages/sidebar';
 import { INode } from '../../../Tree';
 import InfoPanel from './InfoPanel';
+import { useKeyBindings } from '../../../hooks/useKeyBindings';
 
 
 const Node: React.FC<ListChildComponentProps<INode[]>> = ({
@@ -14,7 +16,8 @@ const Node: React.FC<ListChildComponentProps<INode[]>> = ({
 }) => {
     const node = data[index];
 
-    const { activeNode } = useContext(StateContext);
+    const { activeNode, focussedNode } = useContext(StateContext);
+    const nodeRef = useRef<HTMLDivElement>(null);
     const dispatch = useContext(DispatchContext);
 
 
@@ -44,11 +47,19 @@ const Node: React.FC<ListChildComponentProps<INode[]>> = ({
                 type: "onViewFile",
                 value: node.filePath
             });
+            // since we call 
+            setTimeout(() => {
+                // console.log(document.querySelector('.sidebar'))
+                (document.querySelector('.sidebar') as HTMLDivElement)?.click?.();
+            }, 3000);
         }
     };
 
     return (
-        <div onClick={onClick} className={`node-container ${activeNode === node.id ? 'selected' : ''}`} style={style} >
+        <div ref={nodeRef} onClick={onClick} className={classNames('node-container', {
+            selected: activeNode === node.id,
+            focussed: focussedNode === node.id
+        })} style={style} >
             <div className={`node`} style={indentationStyle}>
                 {node.children.length ?
                     <FontAwesomeIcon className='expand-toggle' icon={node.expanded ? faChevronDown : faChevronRight} onClick={toggleNode} /> :
@@ -59,5 +70,7 @@ const Node: React.FC<ListChildComponentProps<INode[]>> = ({
         </div>
     );
 };
+
+
 
 export default Node;
