@@ -6,6 +6,12 @@ interface ISettings {
     thirdParty: boolean;
     reactRouter: boolean;
 }
+
+export enum ExpandedState {
+    EXPANDED,
+    COLLAPSED,
+    UNSET = null
+}
 export default class RenderProvider {
 
     rawTree: INode;
@@ -18,6 +24,8 @@ export default class RenderProvider {
         thirdParty: false
     };
     searchString: string = '';
+
+    gridExpandedState: ExpandedState = null;
 
     constructor() {
         window.addEventListener('message', (event) => {
@@ -125,6 +133,8 @@ export default class RenderProvider {
             return this.expandCollapseConfig[node.id];
         } else if (node.depth === 0) {
             return true;
+        } else if(this.gridExpandedState !== null) {
+            return this.gridExpandedState === ExpandedState.EXPANDED ? true : false;
         }
         return false;
     };
@@ -135,6 +145,13 @@ export default class RenderProvider {
             [node.id]: !node.expanded
         };
         this.updateNodes();
+    }
+
+    setGridExpandedState(gridExpandedState: ExpandedState = null) {
+        this.gridExpandedState = gridExpandedState;
+        this.expandCollapseConfig = {};
+        this.updateNodes();
+        console.log('gridExpandedState');
     }
 
     search(searchString: string) {

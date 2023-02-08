@@ -10,6 +10,20 @@
   height: 100%;
 }
 
+.expand-collapse-buttons{
+  display: inline-block;
+  float: right;
+}
+
+.expand-collapse-buttons > span{
+  padding: 0px 2px;
+  border: 1px solid transparent;
+  background: var(--vscode-button-background);
+  border-radius: 3px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
 .navbar {
   flex-grow: 0;
   padding: 10px 0px;
