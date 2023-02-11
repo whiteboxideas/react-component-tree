@@ -10,18 +10,21 @@
   height: 100%;
 }
 
-.expand-collapse-buttons{
+.expand-collapse-buttons {
   display: inline-block;
   float: right;
 }
 
-.expand-collapse-buttons > span{
+.expand-collapse-buttons>span {
   padding: 0px 2px;
   border: 1px solid transparent;
-  background: var(--vscode-button-background);
   border-radius: 3px;
   margin: 0 5px;
   cursor: pointer;
+}
+
+.expand-collapse-buttons>span:hover {
+  background-color: rgba(var(--vscode-editor-background), 0.8);
 }
 
 .navbar {
@@ -66,7 +69,7 @@
   cursor: pointer;
 }
 
-.node-container{
+.node-container {
   display: flex;
   align-items: center;
   border: 1px solid transparent;
@@ -76,6 +79,11 @@
   border: 1px solid var(--vscode-focusBorder);
   box-sizing: border-box;
   background-color: var(--vscode-inputOption-activeBackground);
+}
+
+.node-container.focussed {
+  border: 1px solid var(--vscode-focusBorder);
+  box-sizing: border-box;
 }
 
 .node {
