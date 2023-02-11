@@ -30,6 +30,10 @@ const Tree: React.FC<IProps> = () => {
                 const node = renderProvider.filePathMap.get(message.value);
                 if (node) {
                     scrollToNode(node);
+                    dispatch({
+                        type: ACTIONS.UPDATE_ACTIVE_NODE,
+                        payload: node.id
+                    });
                 }
             }
         });
@@ -47,10 +51,6 @@ const Tree: React.FC<IProps> = () => {
     const scrollToNode = (node: INode) => {
         if (node) {
             listRef.current?.scrollToItem(node.index, "smart");
-            dispatch({
-                type: ACTIONS.UPDATE_ACTIVE_NODE,
-                payload: node.id
-            });
         }
     };
 
