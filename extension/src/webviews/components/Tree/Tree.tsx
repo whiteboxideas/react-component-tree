@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { FixedSizeList } from 'react-window';
+import PubSub from 'pubsub-js';
 import { ACTIONS } from '../../actions';
 import { useKeyBindings } from '../../hooks/useKeyBindings';
 import { DispatchContext, renderProvider, StateContext } from '../../pages/sidebar';
 import Navigation from '../../service/Navigation';
 import { INode } from '../../Tree';
 import Node from './Node/Node';
+import { PubSubEvents } from '../../constants/PubSubEvents';
 
 interface IProps {
 }
@@ -27,24 +29,38 @@ const Tree: React.FC<IProps> = () => {
             if (message.type === "onActiveTextEditor") {
                 const node = renderProvider.filePathMap.get(message.value);
                 if (node) {
-                    listRef.current?.scrollToItem(node.index, "smart");
-                    dispatch({
-                        type: ACTIONS.UPDATE_ACTIVE_NODE,
-                        payload: node.id
-                    });
+                    scrollToNode(node);
                 }
             }
         });
+        const subscription = PubSub.subscribe(PubSubEvents.SCROLL_TO_NODE, (_, nodeId) => {
+            const node = renderProvider.rowMap.get(nodeId);
+            if (node) {
+                scrollToNode(node);
+            }
+        })
+        return () => {
+            PubSub.unsubscribe(subscription);
+        }
     }, []);
+
+    const scrollToNode = (node: INode) => {
+        if (node) {
+            listRef.current?.scrollToItem(node.index, "smart");
+            dispatch({
+                type: ACTIONS.UPDATE_ACTIVE_NODE,
+                payload: node.id
+            });
+        }
+    };
 
     useKeyBindings((keyCode) => {
         const node = focussedNode ? renderProvider.rowMap.get(focussedNode as string) : null;
-        console.log(focussedNode,node)
         if (node) {
             navigateHandler(keyCode, node);
         }
     },
-        ['ArrowUp', 'ArrowDown', 'ArrowRight', 'ArrowLeft'], focussedNode);
+        ['ArrowUp', 'ArrowDown', 'ArrowRight', 'ArrowLeft', 'Enter'], focussedNode);
 
 
     return (<FixedSizeList
@@ -96,14 +112,21 @@ const navigateHandler = (keyCode, node: INode) => {
             break;
         }
         case 'ArrowUp': {
-            Navigation.moveUp(node)
+            Navigation.moveUp(node);
             break;
         }
         case 'ArrowDown': {
-            Navigation.moveDown(node)
+            Navigation.moveDown(node);
+            break;
+        }
+        case 'Enter': {
+            renderProvider.visitNode(node);
+            break;
+        }
+        default: {
             break;
         }
     }
-}
+};
 
 export default Tree;

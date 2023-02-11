@@ -1,5 +1,5 @@
 import { ACTIONS } from "../actions";
-import { INode, IRawNode, Tree } from "../Tree";
+import { INode} from "../Tree";
 
 type TExpandCollapse = Record<string, boolean>;
 
@@ -61,7 +61,6 @@ export default class RenderProvider {
         this.rowMap = new Map();
         const result = this.filterData([this.rawTree]);
         this.flattenData(result);
-        console.log(result)
     }
 
     /**
@@ -153,11 +152,25 @@ export default class RenderProvider {
         this.updateNodes();
     }
 
+    visitNode(node: INode) {
+        if (!node.thirdParty) {
+            this.dispatch({
+                type: ACTIONS.UPDATE_ACTIVE_NODE,
+                payload: node.id
+            });
+            if (node.filePath) {
+                vscodeApi.postMessage({
+                    type: "onViewFile",
+                    value: node.filePath
+                });
+            }
+        }
+    }
+
     setGridExpandedState(gridExpandedState: ExpandedState = null) {
         this.gridExpandedState = gridExpandedState;
         this.expandCollapseConfig = {};
         this.updateNodes();
-        console.log('gridExpandedState');
     }
 
     search(searchString: string) {

@@ -91,7 +91,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           }
           // Open and the show the user the file they want to see
           const doc = await vscode.workspace.openTextDocument(data.value);
-          const editor = await vscode.window.showTextDocument(doc, { preserveFocus: false, preview: false });
+          const editor = await vscode.window.showTextDocument(doc, { preserveFocus: true, preview: false });
           break;
         }
 
