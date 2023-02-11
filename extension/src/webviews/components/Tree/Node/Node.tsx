@@ -1,8 +1,9 @@
+import React, { useContext, useRef } from 'react'
 import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext } from 'react'
+import classNames from 'classnames';
 import { ListChildComponentProps } from 'react-window'
-import { DispatchContext, renderProvider, StateContext } from '../../../pages/sidebar';
+import {  renderProvider, StateContext } from '../../../pages/sidebar';
 import { INode } from '../../../Tree';
 import InfoPanel from './InfoPanel';
 
@@ -14,9 +15,8 @@ const Node: React.FC<ListChildComponentProps<INode[]>> = ({
 }) => {
     const node = data[index];
 
-    const { activeNode } = useContext(StateContext);
-    const dispatch = useContext(DispatchContext);
-
+    const { activeNode, focussedNode } = useContext(StateContext);
+    const nodeRef = useRef<HTMLDivElement>(null);
 
     const toggleNode = (e) => {
         e.stopPropagation();
@@ -24,31 +24,18 @@ const Node: React.FC<ListChildComponentProps<INode[]>> = ({
     };
 
     const onClick = () => {
-        if (!node.thirdParty) {
-            dispatch({
-                type: "UPDATE_ACTIVE_NODE",
-                payload: node.id
-            });
-            viewFile();
-        }
+      renderProvider.visitNode(node);
     }
     const paddingLeft = 15 * node.level;
     const indentationStyle: React.CSSProperties = {
         paddingLeft
     }
-    // Function that will capture the file path of the current node clicked on + send a message to the extension
-    const viewFile = () => {
-        // Edge case to verify that there is in fact a file path for the current node
-        if (node.filePath) {
-            vscodeApi.postMessage({
-                type: "onViewFile",
-                value: node.filePath
-            });
-        }
-    };
 
     return (
-        <div onClick={onClick} className={`node-container ${activeNode === node.id ? 'selected' : ''}`} style={style} >
+        <div ref={nodeRef} onClick={onClick} className={classNames('node-container', {
+            selected: activeNode === node.id,
+            focussed: focussedNode === node.id
+        })} style={style} >
             <div className={`node`} style={indentationStyle}>
                 {node.children.length ?
                     <FontAwesomeIcon className='expand-toggle' icon={node.expanded ? faChevronDown : faChevronRight} onClick={toggleNode} /> :
@@ -59,5 +46,7 @@ const Node: React.FC<ListChildComponentProps<INode[]>> = ({
         </div>
     );
 };
+
+
 
 export default Node;
