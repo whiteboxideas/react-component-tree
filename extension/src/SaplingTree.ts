@@ -19,7 +19,11 @@ export class Tree implements IRawNode, INode {
   parent: Tree;
   parentList: string[];
   props: Record<string, boolean>;
-  error: string;
+  error: 
+    | '' 
+    | 'File not found.' 
+    | 'Error while processing this file/node.'
+    | string;
 
   constructor(node?: Partial<Tree>) {
     this.id = getNonce(); // shallow copies made from constructor do not share identifiers
@@ -47,15 +51,22 @@ export class Tree implements IRawNode, INode {
    * Use for complete replacement of 'children', 'props' elements (for mutation, use array/object methods).
    */
   public set(key: keyof Tree, value: Tree[keyof Tree]): void {
-    if (key === 'children') {
+    if ([
+      'count',
+      'thirdParty',
+      'reactRouter',
+      'redux',
+      'error'
+    ].includes(key)) {
+      this[String(key)] = value;
+    } else if (key === 'children') {
       if (value && Array.isArray(value) && (!value.length || value[0] instanceof Tree)) {
         this.children.splice(0, this.children.length);
-        this.children.push(...(value as INode[]));
+        this.children.push(...(value as Tree[]));
         return;
       }
       throw new Error('Invalid input children array.');
-    }
-    if (key === 'props') {
+    } else if (key === 'props') {
       if (
         value &&
         typeof value === 'object' &&
@@ -66,6 +77,8 @@ export class Tree implements IRawNode, INode {
         return;
       }
       throw new Error('Invalid input props object.');
+    } else {
+      throw new Error(`Altering property ${key} is not allowed. Create new tree instance instead.`);
     }
   }
 
