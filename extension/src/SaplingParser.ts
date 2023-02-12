@@ -9,7 +9,7 @@ import {
     VariableDeclaration
 } from '@babel/types';
 
-import { ImportData, Token, Tree } from '../src/types';
+import { ImportData, Token, Tree } from './types';
 
 export class SaplingParser {
   /** Public method to generate component tree based on entry file or input node.

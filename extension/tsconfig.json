@@ -10,7 +10,7 @@
 		"jsx": "react",
 		"sourceMap": true,
 		"rootDir": "src",
-		"strict": false  /* enable all strict type-checking options */,
+		"strict": false /* enable all strict type-checking options */,
 		/* Additional Checks */
 		// "noImplicitReturns": true, /* Report error when not all code paths in function return a value. */
 		// "noFallthroughCasesInSwitch": true, /* Report errors for fallthrough cases in switch statement. */
@@ -20,7 +20,6 @@
 		"node_modules",
 		".vscode-test",
 		"src/webviews",
-    "src/test/test_apps"
+		"src/test/test_apps"
 	]
 }
-
