@@ -1,5 +1,5 @@
 import { ACTIONS } from "../actions";
-import { INode} from "../Tree";
+import { INode } from "../../types";
 
 type TExpandCollapse = Record<string, boolean>;
 
@@ -111,7 +111,7 @@ export default class RenderProvider {
     getProcessedNode = (node: any) => {
         return {
             ...node,
-            level: node.depth,
+            depth: node.depth,
             expanded: this.isRowExpanded(node),
             children: []
         };

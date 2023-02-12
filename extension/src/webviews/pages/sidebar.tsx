@@ -4,7 +4,7 @@ import Sidebar from '../components/Sidebar';
 import '../../../media/styles.css';
 import RenderProvider from '../service/RenderProvider';
 import { ACTIONS } from '../actions';
-import { IAction, RootState } from '../../types/StoreTypes'
+import { INode, IAction, RootState } from '../../types';
 
 export const renderProvider = new RenderProvider();
 

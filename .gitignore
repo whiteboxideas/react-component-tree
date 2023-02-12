@@ -103,10 +103,9 @@ dist
 # TernJS port file
 .tern-port
 
-
 # VSCode files
 extension/out
-extensiong/dist
+extension/dist
 extension/node_modules
 extension/.vscode-test/
 *.vsix
@@ -114,3 +113,7 @@ extension/.vscode-test/
 # Package-Lock files:
 package-lock.json
 */package-lock.json
+
+# OSX Metadata file
+.DS_Store
+*/.DS_Store
