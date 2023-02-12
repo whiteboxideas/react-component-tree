@@ -139,7 +139,7 @@ const ASTParser = {
       // Remove any existing error messages if no errors have been found during current pass.
       componentTree.set('error', '');
     };
-    Tree.traverse(root, recurse);
+    root.traverse(recurse);
   },
 
   getChildNodes(

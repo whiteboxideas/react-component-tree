@@ -2,7 +2,7 @@ import { getNonce } from './getNonce';
 import { INode, IRawNode } from './types';
 import { SaplingParser } from './SaplingParser';
 
-export class Tree implements IRawNode {
+export class Tree implements IRawNode, INode {
   index: number;
   id: string;
   name: string;
@@ -15,8 +15,8 @@ export class Tree implements IRawNode {
   thirdParty: boolean;
   reactRouter: boolean;
   redux: boolean;
-  children: INode[];
-  parent: INode;
+  children: Tree[];
+  parent: Tree;
   parentList: string[];
   props: Record<string, boolean>;
   error: string;
@@ -114,23 +114,23 @@ export class Tree implements IRawNode {
   }
 
   /** @returns Normalized array containing current node and all of its descendants. */
-  public get subtree(): INode[] {
-    const descendants: INode[] = [];
-    const callback = (node: INode) => {
+  public get subtree(): Tree[] {
+    const descendants: Tree[] = [];
+    const callback = (node: Tree) => {
       descendants.push(...node.children);
     };
-    Tree.traverse(this, callback);
+    this.traverse(callback);
     return [this, ...descendants];
   }
 
   /** Recursively applies callback on current node and all of its descendants. */
-  public static traverse(node: INode, callback: (node: INode) => void): void {
-    callback(node);
-    if (!node.children || !node.children.length) {
+  public traverse(callback: (node: Tree) => void): void {
+    callback(this);
+    if (!this.children || !this.children.length) {
       return;
     }
-    node.children.forEach((child) => {
-      Tree.traverse(child, callback);
+    this.children.forEach((child) => {
+      child.traverse(callback);
     });
   }
 
@@ -186,7 +186,7 @@ export class Tree implements IRawNode {
           node.toggleExpanded();
         }
       };
-      Tree.traverse(target, restoreExpanded);
+      target.traverse(restoreExpanded);
     });
   }
 
@@ -213,8 +213,8 @@ export class Tree implements IRawNode {
    * @param data: Tree Object containing state data for all nodes in component tree to be restored into webview.
    * @returns Tree class object with all nested descendant nodes also of Tree class.
    */
-  public static deserialize(data: INode): Tree {
-    const recurse = (node: Tree | INode): Tree =>
+  public static deserialize(data: Tree): Tree {
+    const recurse = (node: Tree): Tree =>
       (new Tree({
         ...node,
         children: node.children?.map((child) => recurse(child)),

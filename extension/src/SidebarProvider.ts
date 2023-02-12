@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import { getNonce } from "./getNonce";
 import { SaplingParser } from './SaplingParser';
-import { INode, Tree } from "./types";
+import { Tree } from "./types";
 
 // Sidebar class that creates a new instance of the sidebar + adds functionality with the parser
 export class SidebarProvider implements vscode.WebviewViewProvider {
@@ -15,7 +15,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     this.context = context;
     this._extensionUri = context.extensionUri;
     // Check for sapling state in workspace and set tree with previous state
-    const state: INode = context.workspaceState.get('react-component-tree');
+    const state: Tree = context.workspaceState.get('react-component-tree');
     if (state) {
       this.tree = Tree.deserialize(state);
     }
