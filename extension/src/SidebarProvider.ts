@@ -98,7 +98,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
             return;
           }
           // Get and send the saved tree to the webview
-          this.updateView();
+          await this.updateView();
           break;
         }
 
@@ -107,31 +107,9 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           // use getConfiguration to check what the current settings are for the user
           const settings = await vscode.workspace.getConfiguration('rct');
           // send a message back to the webview with the data on settings
-          webviewView.webview.postMessage({
+          await webviewView.webview.postMessage({
             type: "settings-data",
             value: settings.view
-          });
-          break;
-        }
-
-        // Case when sapling becomes visible in sidebar
-        case 'onSaplingVisible': {
-          if (!this.tree) {
-            return;
-          }
-          // Get and send the saved tree to the webview
-          await this.updateView();
-          break;
-        }
-
-        // Case to retrieve the user's settings
-        case 'onSettingsAcquire': {
-          // use getConfiguration to check what the current settings are for the user
-          const settings = vscode.workspace.getConfiguration('rct');
-          // send a message back to the webview with the data on settings
-          await webviewView.webview.postMessage({
-            type: 'settings-data',
-            value: settings.view,
           });
           break;
         }

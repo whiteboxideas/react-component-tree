@@ -143,6 +143,20 @@ export class Tree implements IRawNode {
     this.expanded = !this.expanded;
   }
 
+  /** Finds subtree node and changes expanded property state.
+   * @param expandedState if not undefined, defines value of expanded property for target node.
+   * If expandedState is undefined, expanded property is negated.
+   */
+  public findAndToggleExpanded(id: string, expandedState?: boolean): void {
+    const target = this.get(id) as Tree | undefined;
+    if (target === undefined) {
+      throw new Error('Invalid input id.');
+    }
+    if (target.expanded !== expandedState) {
+      target.toggleExpanded();
+    }
+  }
+
   /** Triggers on file save event.
    * Finds node(s) that match saved document's file path,
    * reparses their subtrees to reflect updated document content,
