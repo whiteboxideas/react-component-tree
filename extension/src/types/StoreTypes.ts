@@ -1,4 +1,4 @@
-import { INode } from '../webviews/Tree';
+import { INode } from '.';
 import { ACTIONS } from '../webviews/actions';
 
 export interface RootState {
