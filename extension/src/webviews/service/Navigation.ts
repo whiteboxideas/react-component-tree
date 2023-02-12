@@ -2,7 +2,7 @@ import PubSub from 'pubsub-js';
 import { ACTIONS } from "../actions";
 import { PubSubEvents } from '../constants/PubSubEvents';
 import { renderProvider } from "../pages/sidebar";
-import { INode } from "../Tree";
+import { INode } from "../../types";
 
 export default class Navigation {
     static moveUp(node: INode) {
