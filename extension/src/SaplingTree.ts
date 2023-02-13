@@ -46,7 +46,6 @@ export class Tree implements IRawNode, INode {
 
   /** 
    * Sets or modifies value of class fields and performs input validation.
-   * Direct assignment of class fields using member expressions is not allowed.
    * @param key The class field to be modified.
    * @param value The value to be assigned.
    * Use for complete replacement of 'children', 'props' elements (for mutation, use array/object methods).
@@ -128,7 +127,9 @@ export class Tree implements IRawNode, INode {
     }, this) as Tree;
   }
 
-  /** @returns Normalized array containing current node and all of its descendants. */
+  /** 
+   * @returns Normalized array containing current node and all of its descendants.
+   */
   public subtree(): Tree[] {
     const descendants: Tree[] = [];
     const callback = (node: Tree) => {
@@ -138,7 +139,9 @@ export class Tree implements IRawNode, INode {
     return [this, ...descendants];
   }
 
-  /** Recursively applies callback on current node and all of its descendants. */
+  /** 
+   * Recursively applies callback on current node and all of its descendants. 
+   */
   public traverse(callback: (node: Tree) => void): void {
     callback(this);
     if (!this.children || !this.children.length) {
@@ -207,7 +210,8 @@ export class Tree implements IRawNode, INode {
     });
   }
 
-  /** Recursively captures and exports internal state for all nested nodes.
+  /** 
+   * Recursively captures and exports internal state for all nested nodes.
    * Required for lossless conversion to/from workspaceState memento object (webview persistence).
    * @returns JSON-stringifyable Tree object
    */
@@ -226,8 +230,9 @@ export class Tree implements IRawNode, INode {
     return recurse(this);
   }
 
-  /** Recursively converts all nested node data in Tree object into Tree class objects.
-   * @param data: Tree Object containing state data for all nodes in component tree to be restored into webview.
+  /** 
+   * Recursively converts all nested node data in Tree object into Tree class objects.
+   * @param data: Tree object containing state data for all nodes in component tree to be restored into webview.
    * @returns Tree class object with all nested descendant nodes also of Tree class.
    */
   public static deserialize(data: Tree): Tree {
