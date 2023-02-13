@@ -62,21 +62,25 @@ Any updates you make to your files will be automatically processed and mirrored 
 
 # Getting Started
 
-* After installing, click the **`React Component Tree`** tree icon <img src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/list-tree.png" height="16" /> in your extension sidebar.
+* <img src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/list-tree.png" height="16" /> After installing, click the **`React Component Tree`** tree icon  in your extension sidebar.
 
-* From there, you can either click `Choose a file` to select your root component, or build your tree directly from the currently active file in your editor with the `Build Tree` button at the right hand side of your status bar.
+* From there, you can click `Choose a file` to select your root component.
 
-* Click the 〉 and ⌄ buttons to expand and collapse subsets of your tree.
+* You can also build your tree from the currently active file in your editor with the `Build Tree` button at the right hand side of the status bar.
 
-* Clicking on a node will open the file where the component is defined in your editor window.
+* Click the **`〉`** and **`⌄`** buttons to expand and collapse individual nodes.
 
-* Hover over the information icon <img src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/circle-info-solid.png" height="14" /> to get a list of props available to that component.
+* Clicking on a node will open the component file in your editor window.
 
-* Components with a Redux store connection will have this icon next to them. <img height="14" src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/store-solid.png" >.
+* Use the search bar at the top to filter visible nodes by component name.
 
-* Components with path or parser errors will be highlighted with the error color of your workspace theme.
+* <img src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/circle-info-solid.png" height="14" /> Hover over the information icon to get a list of props available to that component.
 
-* If you prefer not to view React Router or other third-party components imported to your app, you can disable either of these in the VS Code Extension Settings.
+*  <img height="14" src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/store-solid.png" > Components with a Redux store connection will be marked with this icon.
+
+* Components with path or parser errors will be highlighted with the `error color` of your workspace theme.
+
+* If you prefer not to view React Router or other third-party components imported into your app, you can disable these in the VS Code Extension Settings.
   * `rct.view.reactRouter`: show/hide React Router component nodes
   * `rct.view.thirdParty`: show/hide third party component nodes
 
