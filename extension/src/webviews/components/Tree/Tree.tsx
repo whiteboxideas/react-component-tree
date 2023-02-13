@@ -5,7 +5,7 @@ import { ACTIONS } from '../../actions';
 import { useKeyBindings } from '../../hooks/useKeyBindings';
 import { DispatchContext, renderProvider, StateContext } from '../../pages/sidebar';
 import Navigation from '../../service/Navigation';
-import { INode } from '../../Tree';
+import { INode } from '../../../types';
 import Node from './Node/Node';
 import { PubSubEvents } from '../../constants/PubSubEvents';
 

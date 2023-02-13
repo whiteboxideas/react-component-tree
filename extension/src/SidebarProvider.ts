@@ -1,13 +1,13 @@
 import * as vscode from "vscode";
 import { getNonce } from "./getNonce";
 import { SaplingParser } from './SaplingParser';
-import { Tree } from "./types/Tree";
+import { Tree } from "./types";
 
 // Sidebar class that creates a new instance of the sidebar + adds functionality with the parser
 export class SidebarProvider implements vscode.WebviewViewProvider {
   _view?: vscode.WebviewView;
   _doc?: vscode.TextDocument;
-  parser: SaplingParser | undefined;
+  tree?: Tree;
   private readonly _extensionUri: vscode.Uri;
   private readonly context: vscode.ExtensionContext;
 
@@ -15,15 +15,14 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     this.context = context;
     this._extensionUri = context.extensionUri;
     // Check for sapling state in workspace and set tree with previous state
-    const state: Tree | undefined = context.workspaceState.get('react-component-tree');
+    const state: Tree = context.workspaceState.get('react-component-tree');
     if (state) {
-      this.parser = new SaplingParser(state.filePath);
-      this.parser.setTree(state);
+      this.tree = Tree.deserialize(state);
     }
   }
 
   // Instantiate the connection to the webview
-  public resolveWebviewView(webviewView: vscode.WebviewView) {
+  public resolveWebviewView(webviewView: vscode.WebviewView): void {
     this._view = webviewView;
 
     webviewView.webview.options = {
@@ -33,35 +32,35 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     };
 
     // Event listener that triggers any moment that the user changes his/her settings preferences
-    vscode.workspace.onDidChangeConfiguration((e) => {
+    vscode.workspace.onDidChangeConfiguration(async () => {
       // Get the current settings specifications the user selects
-      const settings = vscode.workspace.getConfiguration('rct');
+      const settings = vscode.workspace.getConfiguration('react-component-tree');
       // Send a message back to the webview with the data on settings
-      webviewView.webview.postMessage({
-        type: "settings-data",
-        value: settings.view
+      await webviewView.webview.postMessage({
+        type: 'settings-data',
+        value: settings.view,
       });
     });
 
-    vscode.window.onDidChangeActiveTextEditor((e) => {
+    vscode.window.onDidChangeActiveTextEditor(async (e) => {
       const fileName = e?.document?.fileName;
       if (fileName) {
         this._view.webview.postMessage({
           type: "onActiveTextEditor",
           value: fileName
-        })
+        });
       }
-    })
+    });
 
     // Event listener that triggers whenever the user saves a document
-    vscode.workspace.onDidSaveTextDocument((document) => {
+    vscode.workspace.onDidSaveTextDocument(async (document) => {
       // Edge case that avoids sending messages to the webview when there is no tree currently populated
-      if (!this.parser) {
+      if (!this.tree) {
         return;
       }
       // Post a message to the webview with the newly parsed tree
-      this.parser.updateTree(document.fileName);
-      this.updateView();
+      this.tree.updateOnSave(document.fileName);
+      await this.updateView();
     });
 
     // Reaches out to the project file connector function below
@@ -72,20 +71,18 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
       // Switch cases based on the type sent as a message
       switch (data.type) {
         // Case when the user selects a file to begin a tree
-        case "onFile": {
-          // Edge case if the user sends in nothing
+        case 'onFile': {
           if (!data.value) {
             return;
           }
-          // Run an instance of the parser
-          this.parser = new SaplingParser(data.value);
-          this.parser.parse();
-          this.updateView();
+          // Generate tree with SaplingParser
+          this.tree = SaplingParser.parse(data.value);
+          await this.updateView();
           break;
         }
 
         // Case when clicking on tree to open file
-        case "onViewFile": {
+        case 'onViewFile': {
           if (!data.value) {
             return;
           }
@@ -97,11 +94,11 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 
         // Case when sapling becomes visible in sidebar
         case "onSaplingVisible": {
-          if (!this.parser) {
+          if (!this.tree) {
             return;
           }
           // Get and send the saved tree to the webview
-          this.updateView();
+          await this.updateView();
           break;
         }
 
@@ -110,20 +107,10 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           // use getConfiguration to check what the current settings are for the user
           const settings = await vscode.workspace.getConfiguration('rct');
           // send a message back to the webview with the data on settings
-          webviewView.webview.postMessage({
+          await webviewView.webview.postMessage({
             type: "settings-data",
             value: settings.view
           });
-          break;
-        }
-
-        // Case that changes the parser's recorded node expanded/collapsed structure
-        case "onNodeToggle": {
-          // let the parser know that the specific node clicked changed it's expanded value, save in state
-          this.context.workspaceState.update(
-            'rct',
-            this.parser.toggleNode(data.value.id, data.value.expanded)
-          );
           break;
         }
       }
@@ -131,10 +118,15 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
   }
 
   // Called when Generate Tree command triggered by status button or explorer context menu
-  public statusButtonClicked = (uri: vscode.Uri | undefined) => {
-    let fileName;
+  public statusButtonClicked = async (uri: vscode.Uri | undefined): Promise<void> => {
+    let fileName: string;
+
     // If status menu button clicked, no uri, get active file uri
     if (!uri) {
+      // If no active text editor, do nothing
+      if (!vscode.window.activeTextEditor) {
+        return;
+      }
       fileName = vscode.window.activeTextEditor.document.fileName;
     } else {
       fileName = uri.path;
@@ -142,26 +134,24 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 
     // Parse new tree with file as root
     if (fileName) {
-      this.parser = new SaplingParser(fileName);
-      this.parser.parse();
-      this.updateView();
+      this.tree = SaplingParser.parse(fileName);
+      await this.updateView();
     }
   };
 
-  // revive statement for the webview panel
-  public revive(panel: vscode.WebviewView) {
-    this._view = panel;
-  }
-
   // Helper method to send updated tree data to view, and saves current tree to workspace
-  private updateView() {
+  private async updateView() {
+    // If parser or webview do not exist, do nothing
+    if (!this.tree || !this._view) {
+      return;
+    }
+    const treeData = this.tree.serialize();
     // Save current state of tree to workspace state:
-    const tree = this.parser.getTree();
-    this.context.workspaceState.update('react-component-tree', tree);
+    await this.context.workspaceState.update('react-component-tree', treeData);
     // Send updated tree to webview
-    this._view.webview.postMessage({
-      type: "parsed-data",
-      value: tree
+    await this._view.webview.postMessage({
+      type: 'parsed-data',
+      value: treeData,
     });
   }
 

@@ -7,7 +7,7 @@ import { faStore, faInfoCircle, } from '@fortawesome/free-solid-svg-icons';
 // imports for the tooltip
 import Tippy from '@tippy.js/react';
 import 'tippy.js/dist/tippy.css';
-import { INode } from '../../../Tree';
+import { INode } from '../../../../types';
 
 interface IProps {
     node: INode;
