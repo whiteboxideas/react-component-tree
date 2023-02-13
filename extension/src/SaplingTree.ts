@@ -44,7 +44,8 @@ export class Tree implements IRawNode, INode {
     this.error = node?.error ?? '';
   }
 
-  /** Sets or modifies value of class fields and performs input validation.
+  /** 
+   * Sets or modifies value of class fields and performs input validation.
    * Direct assignment of class fields using member expressions is not allowed.
    * @param key The class field to be modified.
    * @param value The value to be assigned.
@@ -82,14 +83,16 @@ export class Tree implements IRawNode, INode {
     }
   }
 
-  /** Finds tree node(s) and returns reference pointer.
+  /** 
+   * Finds tree node(s) and returns reference pointer.
    * @param id
    * @returns Tree node with matching id, or undefined if not found.
    * @param filePath
    * @returns Array of matching Tree nodes, or empty array if none are found.
    */
   public get(...input: string[]): Tree | Tree[] | undefined;
-  /** Get by following traversal path from root to target node
+  /** 
+   * Get by following traversal path from root to target node
    * @param path: path expressed by sequence of each intermediate vertex's index in its parent's children array property.
    * e.g. (0) is the first child of root
    * e.g. (0, 2, 1) would be the second child of the third child of the first child of root
@@ -107,9 +110,8 @@ export class Tree implements IRawNode, INode {
     ) {
       throw new Error('Invalid input type.');
     } else if (typeof input[0] === 'string') {
-      const { subtree } = this;
-      const getById: INode | undefined = subtree.filter(({ id }) => input[0] === id).pop();
-      const getByFilePath: INode[] = subtree.filter(({ filePath }) => input[0] === filePath);
+      const getById: INode | undefined = this.subtree().filter(({ id }) => input[0] === id).pop();
+      const getByFilePath: INode[] = this.subtree().filter(({ filePath }) => input[0] === filePath);
       if (!getById && !getByFilePath.length) {
         throw new Error('Node not found with input: ' + input[0]);
       }
@@ -127,7 +129,7 @@ export class Tree implements IRawNode, INode {
   }
 
   /** @returns Normalized array containing current node and all of its descendants. */
-  public get subtree(): Tree[] {
+  public subtree(): Tree[] {
     const descendants: Tree[] = [];
     const callback = (node: Tree) => {
       descendants.push(...node.children);
@@ -151,12 +153,13 @@ export class Tree implements IRawNode, INode {
     return !this.thirdParty && !this.reactRouter;
   }
 
-  /** Switches isExpanded property state. */
+  /** Switches expanded property state. */
   public toggleExpanded(): void {
     this.expanded = !this.expanded;
   }
 
-  /** Finds subtree node and changes expanded property state.
+  /** 
+   * Finds subtree node and changes expanded property state.
    * @param expandedState if not undefined, defines value of expanded property for target node.
    * If expandedState is undefined, expanded property is negated.
    */
@@ -170,7 +173,8 @@ export class Tree implements IRawNode, INode {
     }
   }
 
-  /** Triggers on file save event.
+  /** 
+   * Triggers on file save event.
    * Finds node(s) that match saved document's file path,
    * reparses their subtrees to reflect updated document content,
    * and restores previous isExpanded state for descendants.
@@ -181,7 +185,7 @@ export class Tree implements IRawNode, INode {
       throw new Error('No nodes were found with file path: ' + savedFilePath);
     }
     targetNodes.forEach((target) => {
-      const prevState = target.subtree.map((node) => {
+      const prevState = target.subtree().map((node) => {
         return { expanded: node.expanded, depth: node.depth, filePath: node.filePath };
       });
 
@@ -208,7 +212,7 @@ export class Tree implements IRawNode, INode {
    * @returns JSON-stringifyable Tree object
    */
   public serialize(): INode {
-    const recurse = (node: INode): INode => {
+    const recurse = (node: Tree): INode => {
       const obj = {
         ...node,
         children: node.children?.map((child) => recurse(child)) ?? [],
