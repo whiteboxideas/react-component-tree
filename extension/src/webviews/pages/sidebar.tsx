@@ -12,7 +12,7 @@ const initialState: RootState = {
     search: '',
     rows: [],
     activeNode: null,
-    focussedNode: null,
+    focusedNode: null,
 };
 
 
@@ -37,13 +37,13 @@ function reducer(state: RootState, action: IAction): RootState {
             return {
                 ...state,
                 activeNode: action.payload,
-                focussedNode: action.payload
+                focusedNode: action.payload
             };
         }
-        case ACTIONS.UPDATE_FOCUSSED_NODE: {
+        case ACTIONS.UPDATE_FOCUSED_NODE: {
             return {
                 ...state,
-                focussedNode: action.payload
+                focusedNode: action.payload
             };
         }
         default: {

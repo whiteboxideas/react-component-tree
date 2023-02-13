@@ -81,7 +81,7 @@
   background-color: var(--vscode-inputOption-activeBackground);
 }
 
-.node-container.focussed {
+.node-container.focused {
   border: 1px solid var(--vscode-focusBorder);
   box-sizing: border-box;
 }

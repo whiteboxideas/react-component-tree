@@ -17,7 +17,7 @@ export default class Navigation {
     private static move(index: number) {
         const node = renderProvider.data[index];
         renderProvider.dispatch({
-            type: ACTIONS.UPDATE_FOCUSSED_NODE,
+            type: ACTIONS.UPDATE_FOCUSED_NODE,
             payload: node.id
         });
         PubSub.publish(PubSubEvents.SCROLL_TO_NODE, node.id);
