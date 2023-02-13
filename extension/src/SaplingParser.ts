@@ -104,7 +104,7 @@ const ASTParser = {
       }
 
       // Create abstract syntax tree of current component tree file
-      let ast: ASTNode | Record<string, Array<Token>>;
+      let ast: ASTNode | Record<string, Token[]>;
       try {
         // See: https://babeljs.io/docs/en/babel-parser#options
         ast = babelParse(fs.readFileSync(path.resolve(componentTree.filePath), 'utf-8'), {
@@ -139,7 +139,7 @@ const ASTParser = {
       // Remove any existing error messages if no errors have been found during current pass.
       componentTree.set('error', '');
     };
-    Tree.traverse(root, recurse);
+    root.traverse(recurse);
   },
 
   getChildNodes(
@@ -180,7 +180,7 @@ const ASTParser = {
     astTokens: Token[],
     imports: Record<string, ImportData>,
     parentNode: Tree
-  ): Array<Tree> {
+  ): Tree[] {
     let childNodes: Record<string, Tree> = {};
     let props: Record<string, boolean> = {};
     let token: Token;
@@ -211,7 +211,7 @@ const ASTParser = {
   },
 
   // Extracts prop names from a JSX element
-  getJSXProps(astTokens: Array<Token>, startLoc: number): Record<string, boolean> {
+  getJSXProps(astTokens: Token[], startLoc: number): Record<string, boolean> {
     let j = startLoc;
     const props: Record<string, boolean> = {};
     while (astTokens[j].type.label !== 'jsxTagEnd') {
@@ -224,7 +224,7 @@ const ASTParser = {
   },
 
   // Checks if current Node is connected to React-Redux Store
-  checkForRedux(astTokens: Array<Token>, imports: Record<string, ImportData>): boolean {
+  checkForRedux(astTokens: Token[], imports: Record<string, ImportData>): boolean {
     // Check that react-redux is imported in this file (and we have a connect method or otherwise)
     let reduxImported = false;
     let connectAlias;
@@ -258,7 +258,7 @@ const ImportParser = {
    * https://github.com/babel/babel/blob/main/packages/babel-parser/ast/spec.md
    * https://github.com/babel/babel/blob/main/packages/babel-types/src/ast-types/generated/index.ts
    */
-  parse(body: Array<ASTNode>): Record<string, ImportData> {
+  parse(body: ASTNode[]): Record<string, ImportData> {
     return body
       .filter((astNode) => isImportDeclaration(astNode) || isVariableDeclaration(astNode))
       .reduce((accum: Record<string, ImportData>, declaration) => {

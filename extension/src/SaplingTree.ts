@@ -2,7 +2,7 @@ import { getNonce } from './getNonce';
 import { INode, IRawNode } from './types';
 import { SaplingParser } from './SaplingParser';
 
-export class Tree implements IRawNode {
+export class Tree implements IRawNode, INode {
   index: number;
   id: string;
   name: string;
@@ -15,11 +15,15 @@ export class Tree implements IRawNode {
   thirdParty: boolean;
   reactRouter: boolean;
   redux: boolean;
-  children: INode[];
-  parent: INode;
+  children: Tree[];
+  parent: Tree;
   parentList: string[];
   props: Record<string, boolean>;
-  error: string;
+  error: 
+    | '' 
+    | 'File not found.' 
+    | 'Error while processing this file/node.'
+    | string;
 
   constructor(node?: Partial<Tree>) {
     this.id = getNonce(); // shallow copies made from constructor do not share identifiers
@@ -40,22 +44,29 @@ export class Tree implements IRawNode {
     this.error = node?.error ?? '';
   }
 
-  /** Sets or modifies value of class fields and performs input validation.
-   * Direct assignment of class fields using member expressions is not allowed.
+  /** 
+   * Sets or modifies value of class fields and performs input validation.
    * @param key The class field to be modified.
    * @param value The value to be assigned.
    * Use for complete replacement of 'children', 'props' elements (for mutation, use array/object methods).
    */
   public set(key: keyof Tree, value: Tree[keyof Tree]): void {
-    if (key === 'children') {
+    if ([
+      'count',
+      'thirdParty',
+      'reactRouter',
+      'redux',
+      'error'
+    ].includes(key)) {
+      this[String(key)] = value;
+    } else if (key === 'children') {
       if (value && Array.isArray(value) && (!value.length || value[0] instanceof Tree)) {
         this.children.splice(0, this.children.length);
-        this.children.push(...(value as INode[]));
+        this.children.push(...(value as Tree[]));
         return;
       }
       throw new Error('Invalid input children array.');
-    }
-    if (key === 'props') {
+    } else if (key === 'props') {
       if (
         value &&
         typeof value === 'object' &&
@@ -66,17 +77,21 @@ export class Tree implements IRawNode {
         return;
       }
       throw new Error('Invalid input props object.');
+    } else {
+      throw new Error(`Altering property ${key} is not allowed. Create new tree instance instead.`);
     }
   }
 
-  /** Finds tree node(s) and returns reference pointer.
+  /** 
+   * Finds tree node(s) and returns reference pointer.
    * @param id
    * @returns Tree node with matching id, or undefined if not found.
    * @param filePath
    * @returns Array of matching Tree nodes, or empty array if none are found.
    */
   public get(...input: string[]): Tree | Tree[] | undefined;
-  /** Get by following traversal path from root to target node
+  /** 
+   * Get by following traversal path from root to target node
    * @param path: path expressed by sequence of each intermediate vertex's index in its parent's children array property.
    * e.g. (0) is the first child of root
    * e.g. (0, 2, 1) would be the second child of the third child of the first child of root
@@ -94,9 +109,8 @@ export class Tree implements IRawNode {
     ) {
       throw new Error('Invalid input type.');
     } else if (typeof input[0] === 'string') {
-      const { subtree } = this;
-      const getById: INode | undefined = subtree.filter(({ id }) => input[0] === id).pop();
-      const getByFilePath: INode[] = subtree.filter(({ filePath }) => input[0] === filePath);
+      const getById: INode | undefined = this.subtree().filter(({ id }) => input[0] === id).pop();
+      const getByFilePath: INode[] = this.subtree().filter(({ filePath }) => input[0] === filePath);
       if (!getById && !getByFilePath.length) {
         throw new Error('Node not found with input: ' + input[0]);
       }
@@ -113,24 +127,28 @@ export class Tree implements IRawNode {
     }, this) as Tree;
   }
 
-  /** @returns Normalized array containing current node and all of its descendants. */
-  public get subtree(): INode[] {
-    const descendants: INode[] = [];
-    const callback = (node: INode) => {
+  /** 
+   * @returns Normalized array containing current node and all of its descendants.
+   */
+  public subtree(): Tree[] {
+    const descendants: Tree[] = [];
+    const callback = (node: Tree) => {
       descendants.push(...node.children);
     };
-    Tree.traverse(this, callback);
+    this.traverse(callback);
     return [this, ...descendants];
   }
 
-  /** Recursively applies callback on current node and all of its descendants. */
-  public static traverse(node: INode, callback: (node: INode) => void): void {
-    callback(node);
-    if (!node.children || !node.children.length) {
+  /** 
+   * Recursively applies callback on current node and all of its descendants. 
+   */
+  public traverse(callback: (node: Tree) => void): void {
+    callback(this);
+    if (!this.children || !this.children.length) {
       return;
     }
-    node.children.forEach((child) => {
-      Tree.traverse(child, callback);
+    this.children.forEach((child) => {
+      child.traverse(callback);
     });
   }
 
@@ -138,12 +156,28 @@ export class Tree implements IRawNode {
     return !this.thirdParty && !this.reactRouter;
   }
 
-  /** Switches isExpanded property state. */
+  /** Switches expanded property state. */
   public toggleExpanded(): void {
     this.expanded = !this.expanded;
   }
 
-  /** Triggers on file save event.
+  /** 
+   * Finds subtree node and changes expanded property state.
+   * @param expandedState if not undefined, defines value of expanded property for target node.
+   * If expandedState is undefined, expanded property is negated.
+   */
+  public findAndToggleExpanded(id: string, expandedState?: boolean): void {
+    const target = this.get(id) as Tree | undefined;
+    if (target === undefined) {
+      throw new Error('Invalid input id.');
+    }
+    if (target.expanded !== expandedState) {
+      target.toggleExpanded();
+    }
+  }
+
+  /** 
+   * Triggers on file save event.
    * Finds node(s) that match saved document's file path,
    * reparses their subtrees to reflect updated document content,
    * and restores previous isExpanded state for descendants.
@@ -154,7 +188,7 @@ export class Tree implements IRawNode {
       throw new Error('No nodes were found with file path: ' + savedFilePath);
     }
     targetNodes.forEach((target) => {
-      const prevState = target.subtree.map((node) => {
+      const prevState = target.subtree().map((node) => {
         return { expanded: node.expanded, depth: node.depth, filePath: node.filePath };
       });
 
@@ -172,16 +206,17 @@ export class Tree implements IRawNode {
           node.toggleExpanded();
         }
       };
-      Tree.traverse(target, restoreExpanded);
+      target.traverse(restoreExpanded);
     });
   }
 
-  /** Recursively captures and exports internal state for all nested nodes.
+  /** 
+   * Recursively captures and exports internal state for all nested nodes.
    * Required for lossless conversion to/from workspaceState memento object (webview persistence).
    * @returns JSON-stringifyable Tree object
    */
   public serialize(): INode {
-    const recurse = (node: INode): INode => {
+    const recurse = (node: Tree): INode => {
       const obj = {
         ...node,
         children: node.children?.map((child) => recurse(child)) ?? [],
@@ -195,12 +230,13 @@ export class Tree implements IRawNode {
     return recurse(this);
   }
 
-  /** Recursively converts all nested node data in Tree object into Tree class objects.
-   * @param data: Tree Object containing state data for all nodes in component tree to be restored into webview.
+  /** 
+   * Recursively converts all nested node data in Tree object into Tree class objects.
+   * @param data: Tree object containing state data for all nodes in component tree to be restored into webview.
    * @returns Tree class object with all nested descendant nodes also of Tree class.
    */
-  public static deserialize(data: INode): Tree {
-    const recurse = (node: Tree | INode): Tree =>
+  public static deserialize(data: Tree): Tree {
+    const recurse = (node: Tree): Tree =>
       (new Tree({
         ...node,
         children: node.children?.map((child) => recurse(child)),
