@@ -24,6 +24,7 @@
   
   <br />
 
+  <!-- Badges: Package/Repo Stats -->
   <p align="center">
     <a href="https://marketplace.visualstudio.com/items?itemName=HabeebArul.react-component-tree">
       <img src="https://img.shields.io/visual-studio-marketplace/v/HabeebArul.react-component-tree">
@@ -44,9 +45,11 @@
 * * *
 This project is forked from [Sapling](https://github.com/oslabs-beta/sapling), which is no longer under active development. We've introduced a number of core performance improvements, and will continue to add new and exciting features.
 * * *
+<!-- Screen capture demo -->
 
 ![quizwall_demo](https://user-images.githubusercontent.com/34228073/218852264-5321e6f8-55b4-4b03-9baa-5cd341d4e120.gif)
 
+<!-- Description -->
 * * *
 **`React Component Tree`** is a VS Code extension for React developers. As your application scales, its file structure tends to become less and less intuitive. Depending on your project architecture, your components might be organized in a completely different configuration to the component hierarchy of your React application.
 
@@ -58,6 +61,7 @@ Any updates you make to your files will be automatically processed and mirrored 
 
 <br />
 
+<!-- Tech stack badges -->
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)[![VSCode Extension API](https://img.shields.io/badge/VSCode_Extension_API-007acc?style=for-the-badge&logo=visual-studio-code&logoColor=white)](https://code.visualstudio.com/api)[![Babel](https://img.shields.io/badge/Babel_Parser-F9DC3E?style=for-the-badge&logo=babel&logoColor=white)](https://babeljs.io/docs/en/babel-parser)[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://typescriptlang.org)\
 [![Webpack](https://img.shields.io/badge/Webpack-8DD6F9?style=for-the-badge&logo=Webpack&logoColor=white)](https://webpack.js.org/)[![Mocha](https://img.shields.io/badge/Mocha-8D6748?style=for-the-badge&logo=Mocha&logoColor=white)](https://mochajs.org/)[![Chai](https://img.shields.io/badge/Chai-A30701?style=for-the-badge&logo=Chai&logoColor=white)](https://www.chaijs.com/)[![Github Actions](https://img.shields.io/badge/Github_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions)
 
@@ -87,8 +91,6 @@ Any updates you make to your files will be automatically processed and mirrored 
 
 * To install **`React Component Tree`** for development, please see the contributing section below.
 
-<br />
-
 # Getting Started
 
 * <img src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/list-tree.png" height="16" /> After installing, click the **`React Component Tree`** tree icon  in your extension sidebar.
@@ -112,8 +114,6 @@ Any updates you make to your files will be automatically processed and mirrored 
 * If you prefer not to view React Router or other third-party components imported into your app, you can disable these in the VS Code Extension Settings.
   * `rct.view.reactRouter`: show/hide React Router component nodes
   * `rct.view.thirdParty`: show/hide third party component nodes
-
-<br />
 
 # Usage
 
@@ -160,7 +160,7 @@ Any updates you make to your files will be automatically processed and mirrored 
       export default connect(mapStateToProps, mapDispatchToProps)(App);
   ```
 
-* **`React Component Tree`** prioritizes file dependencies over component dependencies. In the following example, **`React Component Tree`** will display Home and Navbar as siblings, both children of App.
+* **`React Component Tree`** prioritizes file dependencies over component dependencies. In the following example, **`React Component Tree`** will display Home and Navbar as siblings:
 
   ```JSX
       // App.jsx
@@ -178,10 +178,8 @@ Any updates you make to your files will be automatically processed and mirrored 
           })
       }
   ```
+
   ![readme-example](https://user-images.githubusercontent.com/34228073/218852279-413c62ac-ecb9-4094-8b35-60013c98d2f4.png)
-
-
-<br />
 
 # Contributing
 
@@ -204,8 +202,6 @@ Any updates you make to your files will be automatically processed and mirrored 
 * [Lindsay Baird](https://github.com/labaird)
 * [Paul Coster](https://github.com/PLCoster)
 
-<br />
-
 # Acknowledgements
 
 * Forked from [Sapling](https://github.com/oslabs-beta/sapling)
@@ -214,8 +210,6 @@ Any updates you make to your files will be automatically processed and mirrored 
 * Tooltips with [Tippy](https://www.npmjs.com/package/@tippy.js/react)
 * **`React Component Tree`** logo from [Freepik](https://www.freepik.com/vectors/tree)
 * Readme badges from [shields.io](https://shields.io/)
-
-<br />
 
 # License
 
