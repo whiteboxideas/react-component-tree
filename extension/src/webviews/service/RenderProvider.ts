@@ -73,7 +73,7 @@ export default class RenderProvider {
         function handler(nodes: INode[]) {
             return nodes.reduce((acc: INode[], node) => {
                 const hasChildren = !!node?.children?.length;
-                if (isNodeElligible(node)) {
+                if (isNodeEligible(node)) {
                     const processedNode = getProcessedNode(node);
                     if (hasChildren) {
                         processedNode.children = handler(node.children);
@@ -100,7 +100,7 @@ export default class RenderProvider {
             }
         }
 
-        function isNodeElligible(node: INode) {
+        function isNodeEligible(node: INode) {
             if (!settings.thirdParty) {
                 return !node.thirdParty;
             }
