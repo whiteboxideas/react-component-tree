@@ -21,7 +21,7 @@
     ·
     <a href="https://github.com/hb1998/react-component-tree/issues/new?assignees=&labels=&template=feature_request.md&title=">Request Feature</a>
   </p>
-
+  
   <br />
 
   <p align="center">
@@ -45,6 +45,9 @@
 This project is forked from [Sapling](https://github.com/oslabs-beta/sapling), which is no longer under active development. We've introduced a number of core performance improvements, and will continue to add new and exciting features.
 * * *
 
+![quizwall_demo](https://user-images.githubusercontent.com/34228073/218852264-5321e6f8-55b4-4b03-9baa-5cd341d4e120.gif)
+
+* * *
 **`React Component Tree`** is a VS Code extension for React developers. As your application scales, its file structure tends to become less and less intuitive. Depending on your project architecture, your components might be organized in a completely different configuration to the component hierarchy of your React application.
 
 Wouldn't it be nice to have instant access to a visual representation of the dependency relationships between the components in your application? How about being able to quickly reference your available props and routes with indication of conditional rendering?
@@ -175,6 +178,7 @@ Any updates you make to your files will be automatically processed and mirrored 
           })
       }
   ```
+  ![readme-example](https://user-images.githubusercontent.com/34228073/218852279-413c62ac-ecb9-4094-8b35-60013c98d2f4.png)
 
 
 <br />
