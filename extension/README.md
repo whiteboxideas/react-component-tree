@@ -13,7 +13,7 @@
   </h2>
 
   <h3 align="center">
-    Your entire React project — right at your fingertips.
+    Your entire React project — At your fingertips.
   </h3>
 
   <p align="center">
