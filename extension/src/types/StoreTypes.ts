@@ -5,7 +5,7 @@ export interface RootState {
     search: string;
     rows: INode[];
     activeNode: string | null;
-    focussedNode: string | null;
+    focusedNode: string | null;
 }
 
 export interface IAction {

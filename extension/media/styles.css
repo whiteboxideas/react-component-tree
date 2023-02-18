@@ -1,7 +1,7 @@
 #root {
   margin: 0;
   height: 100%;
-  background-color: var(--vscode-menu-background);
+  background-color: var(--vscode-editor-background);
 }
 
 .sidebar {
@@ -81,7 +81,7 @@
   background-color: var(--vscode-inputOption-activeBackground);
 }
 
-.node-container.focussed {
+.node-container.focused {
   border: 1px solid var(--vscode-focusBorder);
   box-sizing: border-box;
 }
@@ -100,7 +100,7 @@
 
 .node_icons {
   margin-left: 5px;
-  opacity: 40%;
+  opacity: 75%;
   color: var(--vscode-button-background);
 }
 

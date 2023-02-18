@@ -2,238 +2,214 @@
 <!-- NOTE: this README is the one that shows inside VSCode extension marketplace -->
 
 <!-- PROJECT LOGO -->
-<br />
-This project is forked from https://github.com/oslabs-beta/sapling but it seems the project is dead, we have made a lot of core performance improvements
-and will continue to add new features. 
 <p align="center">
   <a href="https://github.com/hb1998/react-component-tree">
-    <img src="extension/media/logo.png" alt="Logo" height="120">
+    <img src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/logo.png" alt="Logo" height="120">
   </a>
+</p>
 
-  <h2 align="center">React component tree</h2>
+  <h2 align="center">
+    React Component Tree
+  </h2>
+
+  <h3 align="center">
+    Your entire React project — At your fingertips.
+  </h3>
 
   <p align="center">
-    A convenient way to traverse your React application.
-    <br />
-    <a href="https://github.com/hb1998/react-component-tree"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/hb1998/react-component-tree/issues">Report Bug</a>
+    <a href="https://github.com/hb1998/react-component-tree/issues/new?assignees=&labels=&template=bug_report.md&title=">Report Bug</a>
     ·
-    <a href="https://github.com/hb1998/react-component-tree/issues">Request Feature</a>
+    <a href="https://github.com/hb1998/react-component-tree/issues/new?assignees=&labels=&template=feature_request.md&title=">Request Feature</a>
   </p>
   
-</p>
+  <br />
 
-<hr>
+  <!-- Badges: Package/Repo Stats -->
+  <p align="center">
+    <a href="https://marketplace.visualstudio.com/items?itemName=HabeebArul.react-component-tree">
+      <img src="https://img.shields.io/visual-studio-marketplace/v/HabeebArul.react-component-tree">
+    </a>
+    <img src="https://img.shields.io/visual-studio-marketplace/r/HabeebArul.react-component-tree">
+    <img src="https://img.shields.io/visual-studio-marketplace/i/HabeebArul.react-component-tree">
+    <img src="https://img.shields.io/visual-studio-marketplace/d/HabeebArul.react-component-tree">
+    <img src="https://img.shields.io/visual-studio-marketplace/last-updated/HabeebArul.react-component-tree">
+    <img src="https://img.shields.io/github/languages/code-size/hb1998/react-component-tree">
+    <br />
+    <img src="https://img.shields.io/github/stars/hb1998/react-component-tree">
+    <img src="https://img.shields.io/github/issues-closed/hb1998/react-component-tree">
+    <img src="https://img.shields.io/github/issues-pr-closed/hb1998/react-component-tree">
+    <img src="https://img.shields.io/github/last-commit/hb1998/react-component-tree">
+    <img src="https://img.shields.io/github/license/hb1998/react-component-tree">
+  </p>
 
-<!-- TABLE OF CONTENTS -->
-<details open="open">
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li><a href="#installation">Installation</a></li>
-    <li>
-      <a href="#getting-started">Getting Started</a></li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#extension-settings">Extension Settings</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#creators">Creators</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
-  </ol>
-</details>
+* * *
+This project is forked from [Sapling](https://github.com/oslabs-beta/sapling), which is no longer under active development. We've introduced a number of core performance improvements, and will continue to add new and exciting features.
+* * *
+<!-- Screen capture demo -->
 
-<hr>
+![quizwall_demo](https://user-images.githubusercontent.com/34228073/218852264-5321e6f8-55b4-4b03-9baa-5cd341d4e120.gif)
 
-## About The Project
+<!-- Description -->
+* * *
+**`React Component Tree`** is a VS Code extension for React developers. As your application scales, its file structure tends to become less and less intuitive. Depending on your project architecture, your components might be organized in a completely different configuration to the component hierarchy of your React application.
 
-<br/>
-<p align="center">
-  <img width="900" src="extension/media/quizwall_demo.gif">
-</p>
-<br/>
+Wouldn't it be nice to have instant access to a visual representation of the dependency relationships between the components in your application? How about being able to quickly reference your available props and routes with indication of conditional rendering?
 
-React component tree is a VS Code extension built with React developers in mind. As your codebase grows, your native file structure becomes less and less intuitive. Wouldn't it be nice to have a file structure that represents the actual relationships between the components and containers in your application? Wouldn't you like a quick reference to your available props, and an indication of routes and conditional rendering?
+With **`React Component Tree`**, you don't have to guess at the parent component of your current file anymore. **`React Component Tree`** is an interactive hierarchical dependency tree that lives directly within your VS Code IDE. Simply select a component file as the project root, and **`React Component Tree`** will build a full component tree and retrieve information about available props at any level. It also provides visual indication of Javascript syntax or import errors in your files, and shows you which components are connected to your Redux store.
 
-With React component tree, you don't have to guess at the parent component of your current file. React component tree is an interactive hierarchical dependency tree that lives directly within your VS Code IDE, as accessible as the native file system. You can build your tree by selecting any component file as the root and get information about the available props at any level. It also provides visual indication of Javascript syntax or import errors in your files, and shows you which components are connected to your Redux store.
+Any updates you make to your files will be automatically processed and mirrored in the sidebar view. You can also navigate **`React Component Tree`** using your keyboard, putting your entire project right at your fingertips.
 
+<br />
 
-### Built With
-<ul>
-  <li>
-    <img height="14" src="extension/media/react-brands.png"><a href="https://reactjs.org/"> React</a>
-  </li>
-  <li>
-    <img height="14" src="extension/media/vscode.png"><a href="https://code.visualstudio.com/api"> VSCode Extension API</a>
-  </li>
-  <li>
-    <img height="14" src="extension/media/mochajs-icon.png"><a href="https://mochajs.org/"> Mocha</a>
-  </li>
-  <li>
-    <img height="14" src="extension/media/chai_icon.png"><a href="https://www.chaijs.com/"> Chai</a>
-  </li>
-  <li>
-    <img height="14" src="extension/media/babel-logo-minimal.png"><a href="https://babeljs.io/docs/en/babel-parser"> Babel Parser</a>
-  </li>
-  <li>
-    <img height="14" src="extension/media/webpack.png"><a href="https://webpack.js.org/"> Webpack</a>
-  </li>
-</ul>
+<!-- Tech stack badges -->
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)[![VSCode Extension API](https://img.shields.io/badge/VSCode_Extension_API-007acc?style=for-the-badge&logo=visual-studio-code&logoColor=white)](https://code.visualstudio.com/api)[![Babel](https://img.shields.io/badge/Babel_Parser-F9DC3E?style=for-the-badge&logo=babel&logoColor=white)](https://babeljs.io/docs/en/babel-parser)[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://typescriptlang.org)\
+[![Webpack](https://img.shields.io/badge/Webpack-8DD6F9?style=for-the-badge&logo=Webpack&logoColor=white)](https://webpack.js.org/)[![Mocha](https://img.shields.io/badge/Mocha-8D6748?style=for-the-badge&logo=Mocha&logoColor=white)](https://mochajs.org/)[![Chai](https://img.shields.io/badge/Chai-A30701?style=for-the-badge&logo=Chai&logoColor=white)](https://www.chaijs.com/)[![Github Actions](https://img.shields.io/badge/Github_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions)
 
-## Installation
+<br />
 
-Installing from VS Code Extension Marketplace:
+# Table of Contents
+
+<ol>
+  <li><a href="#installation">Installation</a></li>
+  <li><a href="#getting-started">Getting Started</a></li>
+  <li><a href="#usage">Usage</a></li>
+  <li><a href="#contributing">Contributing</a></li>
+  <li><a href="#creators">Creators</a></li>
+  <li><a href="#acknowledgements">Acknowledgements</a></li>
+  <li><a href="#license">License</a></li>
+</ol>
+
+<br />
+
+# Installation
 
 1. If needed, install Visual Studio Code for Windows (7+), macOS (Sierra+), or Linux (details).
 
-2. Install the React component tree extension for Visual Studio Code. Search for 'React Component Tree' in the VS Code extensions tab, or click [here](https://marketplace.visualstudio.com/items?itemName=HabeebArul.react-component-tree).
+2. Install the **`React Component Tree`** extension for Visual Studio Code from the Extension Marketplace. Search for 'React Component Tree' in the VS Code extensions tab, or click [here](https://marketplace.visualstudio.com/items?itemName=HabeebArul.react-component-tree).
 
-3. Once complete, you'll see React component tree appear in your sidebar. You can now begin using React component tree! Check out the Getting Started below for information on how to get started.
+3. Once complete, you'll see **`React Component Tree`** appear in your sidebar. You can now begin using **`React Component Tree`**! Check out the Getting Started below for information on how to get started.
 
-To install React component tree for development, please see the contributing section below.
+* To install **`React Component Tree`** for development, please see the contributing section below.
 
-## Getting Started
+# Getting Started
 
-1. After installing VSCode Extension, you will see the extension on your sidebar. Click the "Choose a File" button.
+* <img src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/list-tree.png" height="16" /> After installing, click the **`React Component Tree`** tree icon  in your extension sidebar.
 
-2. Your file explorer window will launch. Select an entrypoint, a file where the parent component for the rest of your application is rendered.
+* From there, you can click `Choose a file` to select your root component.
 
-3. Your sidebar will now display a component tree.
+* You can also build your tree from the currently active file in your editor with the `Build Tree` button at the right hand side of the status bar.
 
-## Usage
+* Click the **`〉`** and **`⌄`** buttons to expand and collapse individual nodes.
 
-After installing, click the React component tree tree icon in your extension sidebar (image of icon here). From there, you can either click "Choose a file" to select your root component, or build your tree directly from a file open in your editor with the "Build Tree" button on the right hand side of your status bar. Click the + and - buttons to expand and collapse subsets of your tree, and hover over the information icon (image of icon here) to get a list of props available to that component. You can also press the view file icon (image of icon here) to open the file where the component is defined in your editor window. Below is a quick-reference legend for icon and text format meanings. If you prefer not to view React Router or other third-party components imported to your app, you can disable either of these in the VS Code Extension Settings.
+* Clicking on a node will open the component file in your editor window.
 
-Icon Legend in React component tree Tree View:
-<ul>
-  <li>
-    <img height="14" src="extension/media/circle-info-solid.png">  available props (hover)
-  </li>
-  <li>
-    <img height="14" src="extension/media/circle-arrow-right-solid.png" >  open file (click)
-  </li>
-  <li>
-    <img height="14" src="extension/media/store-solid.png" >  Redux store connection
-  </li>
-  <li>
-    <span color="red">Navbar</span>  error in file (matches the error color of your theme)
-  </li>
-  <li>
-    <b>Navbar</b>: currently open file
-  </li>
-</ul>
+* Use the search bar at the top to filter visible nodes by component name.
 
-React component tree can currently display React apps made with JSX/TSX and ES6 import syntax.
+* <img src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/circle-info-solid.png" height="14" /> Hover over the information icon to get a list of props available to that component.
 
-React component tree will detect React components invoked using JSX tag syntax and React-Router component syntax, where React is imported in a file:
+*  <img height="14" src="https://raw.githubusercontent.com/hb1998/react-component-tree/master/extension/media/store-solid.png" > Components with a Redux store connection will be marked with this icon.
 
-```JSX
-    // Navbar will be detected as a child of the current file
-    <Navbar />
+* Components with path or parser errors will be highlighted with the `error color` of your workspace theme.
 
-    // As above
-    <Navbar></Navbar>
+* If you prefer not to view React Router or other third-party components imported into your app, you can disable these in the VS Code Extension Settings.
+  * `rct.view.reactRouter`: show/hide React Router component nodes
+  * `rct.view.thirdParty`: show/hide third party component nodes
 
-    // Route and Navbar will be detected as child components of the current file
-    <Route component={Navbar} />
+# Usage
 
-    // Route and App will be detected as child components of the current file
-    <Route children={App} />
-```
+* **`React Component Tree`** can currently display React apps made with JSX/TSX and ES6 import syntax.
 
-React component tree will detect the names of inline props for JSX components it identifies:
+* **`React Component Tree`** will detect React components invoked using JSX tag syntax and React-Router component syntax, where React is imported in a file:
 
-```JSX
-    // props 'userId' and 'userName' will be listed for Navbar in React component tree
-    <Navbar userId={...} userName={...} />
-```
+  ```JSX
+      // Navbar will be detected as a child of the current file
+      <Navbar />
 
-React component tree can identify components connected to the Redux store, when 'connect' is imported from 'react-redux', and the component is the export default of the file:
+      // As above
+      <Navbar></Navbar>
 
-```JSX
-    // App.jsx
-    import React from 'react';
-    import { connect } from 'react-redux';
+      // Route and Navbar will be detected as child components of the current file
+      <Route component={Navbar} />
 
-    const mapStateToProps = ...
-    const mapDispatchToProps = ...
+      // Route and App will be detected as child components of the current file
+      <Route children={App} />
+  ```
 
-    const App = (props) => {
-      return <h1>This is the App</h1>
-    }
+* **`React Component Tree`** will detect the names of inline props for JSX components it identifies:
 
-    // React component tree will detect App as connected to the Redux store
-    export default connect(mapStateToProps, mapDispatchToProps)(App);
-```
+  ```JSX
+      // props 'userId' and 'userName' will be listed for Navbar in **`React Component Tree`**
+      <Navbar userId={...} userName={...} />
+  ```
 
-### Note
-React component tree prioritizes file dependencies over component dependencies. Consider the following JSX contained in the file App.jsx:
+* **`React Component Tree`** can identify components connected to the Redux store, when 'connect' is imported from 'react-redux', and the component is the export default of the file:
 
-```JSX
-    // App.jsx
-    import React from 'react';
-    import Home from './Home';
-    import Navbar from './Navbar';
+  ```JSX
+      // App.jsx
+      import React from 'react';
+      import { connect } from 'react-redux';
 
-    class App extends Component {
+      const mapStateToProps = ...
+      const mapDispatchToProps = ...
 
-      render (
-        return {
-          <Home>
-            <Navbar />
-          </Home>
-        })
-    }
-```
+      const App = (props) => {
+        return <h1>This is the App</h1>
+      }
 
-React component tree will display Home and Navbar as siblings, both children of App: (image of actual React component tree here)
+      // **`React Component Tree`** will detect App as connected to the Redux store
+      export default connect(mapStateToProps, mapDispatchToProps)(App);
+  ```
+
+* **`React Component Tree`** prioritizes file dependencies over component dependencies. In the following example, **`React Component Tree`** will display Home and Navbar as siblings:
+
+  ```JSX
+      // App.jsx
+      import React from 'react';
+      import Home from './Home';
+      import Navbar from './Navbar';
+
+      class App extends Component {
+
+        render (
+          return {
+            <Home>
+              <Navbar />
+            </Home>
+          })
+      }
+  ```
+
+  ![readme-example](https://user-images.githubusercontent.com/34228073/218852279-413c62ac-ecb9-4094-8b35-60013c98d2f4.png)
+
+# Contributing
+
+1. Fork the [project repo](https://github.com/hb1998/react-component-tree).
+2. Open the `react-component-tree/extension` folder in your VS Code IDE.
+3. Open `extension/src/extension.ts`
+4. With the `extension` folder as your pwd, run this command: `npm run watch`.
+5. From the menu, click Run - Start Debugging (or press F5), and select VS Code Extension Development from the command palette dropdown. An extension development host will open in a new window.
+6. Click the React Component Tree icon on the extension development host window sidebar. To refresh the extension development host, use `Ctrl+R` (or `Cmd+R` on Mac).
 
 <br />
-  <img src="extension/media/readme-example.png">
 
-### Contributor Usage
-
-1. Download/clone the project from [Github](https://github.com/hb1998/react-component-tree)
-2. Open the 'react-component-tree/extension' folder in your VS Code IDE.
-2. Open extension/src/extension.ts
-3. To view the webview, in your terminal navigate into the 'extension' folder and run the following command: `npm run watch`
-4. Press F5. A new VSCode window will open with the React Component Tree Extension.
-5. Click the React Component Tree icon on the left to see the React Component Tree sidebar.
-
-Note: `Ctrl+R` (or `Cmd+R` on Mac) will refresh the extension development host
-
-## Extension Settings
-
-This extension contributes the following settings:
-
-* `rct.view.reactRouter`: enable/disable React Router component nodes
-* `rct.view.thirdParty`: enable/disable all third party component nodes
-
-## License
-
-Distributed under the MIT License. See [`LICENSE`](https://github.com/hb1998/react-component-tree/blob/master/LICENSE) for more information.
-
-## Creators
+# Creators
 
 * [Habeeb](https://github.com/hb1998)
 * [Arul Valan](https://github.com/ArulValan)
+* [Jongsun Suh](https://github.com/MajorLift)
 * [Charles Gutwirth](https://github.com/charlesgutwirth)
 * [Jordan Hisel](https://github.com/jo-cella)
 * [Lindsay Baird](https://github.com/labaird)
 * [Paul Coster](https://github.com/PLCoster)
 
+# Acknowledgements
 
-## Acknowledgements
-* Parsing Strategy inspired by [React Component Hierarchy](https://www.npmjs.com/package/react-component-hierarchy)
-* Interactive tree view styling adapted from [Pure CSS Tree Menu](https://codepen.io/bisserof/pen/fdtBm)
+* Forked from [Sapling](https://github.com/oslabs-beta/sapling)
+* Parsing strategy inspired by [React Component Hierarchy](https://www.npmjs.com/package/react-component-hierarchy)
 * Icons from [Font Awesome](https://fontawesome.com)
 * Tooltips with [Tippy](https://www.npmjs.com/package/@tippy.js/react)
-* [Best README Template](https://github.com/othneildrew/Best-README-Template)
-* React component tree Logo from [Freepik](https://www.freepik.com/vectors/tree)
 * Readme badges from [shields.io](https://shields.io/)
+
+# License
+
+Distributed under the MIT License. See [`LICENSE`](https://github.com/hb1998/react-component-tree/blob/master/LICENSE) for more information.

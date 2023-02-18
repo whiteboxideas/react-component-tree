@@ -15,7 +15,7 @@ const Node: React.FC<ListChildComponentProps<INode[]>> = ({
 }) => {
     const node = data[index];
 
-    const { activeNode, focussedNode } = useContext(StateContext);
+    const { activeNode, focusedNode } = useContext(StateContext);
     const nodeRef = useRef<HTMLDivElement>(null);
 
     const toggleNode = (e) => {
@@ -34,7 +34,7 @@ const Node: React.FC<ListChildComponentProps<INode[]>> = ({
     return (
         <div ref={nodeRef} onClick={onClick} className={classNames('node-container', {
             selected: activeNode === node.id,
-            focussed: focussedNode === node.id
+            focused: focusedNode === node.id
         })} style={style} >
             <div className={`node`} style={indentationStyle}>
                 {node.children.length ?

@@ -17,7 +17,7 @@ const Tree: React.FC<IProps> = () => {
     const height = document.body.clientHeight - header;
     const width = document.body.clientWidth - 10;
 
-    const { rows, focussedNode } = useContext(StateContext);
+    const { rows, focusedNode } = useContext(StateContext);
     const dispatch = useContext(DispatchContext);
 
     const listRef: React.LegacyRef<FixedSizeList<INode[]>> = useRef(null);
@@ -55,12 +55,12 @@ const Tree: React.FC<IProps> = () => {
     };
 
     useKeyBindings((keyCode) => {
-        const node = focussedNode ? renderProvider.rowMap.get(focussedNode as string) : null;
+        const node = focusedNode ? renderProvider.rowMap.get(focusedNode as string) : null;
         if (node) {
             navigateHandler(keyCode, node);
         }
     },
-        ['ArrowUp', 'ArrowDown', 'ArrowRight', 'ArrowLeft', 'Enter'], focussedNode);
+        ['ArrowUp', 'ArrowDown', 'ArrowRight', 'ArrowLeft', 'Enter'], focusedNode);
 
 
     return (<FixedSizeList
