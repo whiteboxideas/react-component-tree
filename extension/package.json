@@ -26,7 +26,7 @@
 			"activitybar": [
 				{
 					"id": "react-component-tree",
-					"title": "React component tree",
+					"title": "React Branches",
 					"icon": "media/list-tree.svg"
 				}
 			]
@@ -36,7 +36,7 @@
 				{
 					"type": "webview",
 					"id": "react-component-tree",
-					"name": "React component tree",
+					"name": "React Branches",
 					"icon": "media/list-tree.svg",
 					"contextualTitle": "react-component-tree"
 				}
@@ -45,12 +45,12 @@
 		"commands": [
 			{
 				"command": "rct.refresh",
-				"category": "React component tree",
+				"category": "React Branches",
 				"title": "Refresh"
 			},
 			{
 				"command": "rct.generateTree",
-				"category": "React component tree",
+				"category": "React Branches",
 				"title": "Generate Tree"
 			}
 		],
