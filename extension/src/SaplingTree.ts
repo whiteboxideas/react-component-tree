@@ -68,15 +68,14 @@ export class Tree implements IRawNode, INode {
         return;
       }
       throw new Error("Invalid input children array.");
-    }
-    if (key === "hookList") {
-      console.log("SaplingTree.ts-73: ", value, Array.isArray(value));
-      if (value && Array.isArray(value)) {
-        this.hookList.splice(0, this.hookList.length);
-        this.hookList.push(...(value as Token[]));
-        return;
-      }
-      throw new Error("Invalid input hookList array.");
+      // }
+      // if (key === "hookList") {
+      //   if (value && Array.isArray(value)) {
+      //     this.hookList.splice(0, this.hookList.length);
+      //     this.hookList.push(...(value as Token[]));
+      //     return;
+      //   }
+      //   throw new Error("Invalid input hookList array.");
     } else if (key === "props") {
       if (
         value &&

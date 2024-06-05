@@ -157,11 +157,10 @@ const ASTParser = {
         "children",
         ASTParser.getJSXChildren(ast.tokens, imports, componentTree)
       );
-      componentTree.set(
-        "hookList",
-        ASTParser.getHooksChildren(ast.tokens, imports, componentTree)
-      );
-      console.log("SaplingParser.ts-135: ", componentTree);
+      // componentTree.set(
+      // "hookList",
+      ASTParser.getHooksChildren(ast.tokens, imports, componentTree);
+      // );
       // Check if current node is connected to the Redux store
       componentTree.set("redux", ASTParser.checkForRedux(ast.tokens, imports));
 
@@ -180,21 +179,27 @@ const ASTParser = {
   ): Record<string, Tree> {
     const childNodes = { ...children };
     const currentNode = children[astToken.value];
+    let filePath = parent.filePath;
+    let name = astToken.value.toString();
     if (currentNode) {
       currentNode.set("count", currentNode.count + 1);
       Object.assign(currentNode.props, props);
     } else {
-      const moduleIdentifier = imports[astToken.value].importPath;
-      const name = imports[astToken.value].importName;
-      const filePath = ParserHelpers.validateFilePath(
-        path.resolve(path.dirname(parent.filePath), moduleIdentifier)
-      );
+      const moduleIdentifier = imports[astToken.value]?.importPath;
+      if (imports[astToken.value]?.importName) {
+        name = imports[astToken.value]?.importName;
+      }
+      if (moduleIdentifier) {
+        filePath = ParserHelpers.validateFilePath(
+          path.resolve(path.dirname(parent.filePath), moduleIdentifier)
+        );
+      }
       // Add tree node to childNodes if one does not exist
       childNodes[astToken.value] = new Tree({
         name,
         fileName: path.basename(filePath),
         filePath,
-        importPath: moduleIdentifier,
+        importPath: moduleIdentifier || parent.importPath,
         depth: parent.depth + 1,
         props,
         parent,
@@ -213,12 +218,15 @@ const ASTParser = {
     let childNodes: Record<string, Tree> = {};
     let props: Record<string, boolean> = {};
     let token: Token;
+
     for (let i = 0; i < astTokens.length; i++) {
       // Case for finding JSX tags eg <App .../>
+
       if (
         astTokens[i].type.label === "jsxTagStart" &&
-        astTokens[i + 1].type.label === "jsxName" &&
-        imports[astTokens[i + 1].value]
+        astTokens[i + 1].type.label === "jsxName"
+        // &&
+        // imports[astTokens[i + 1].value]
       ) {
         token = astTokens[i + 1];
         props = ASTParser.getJSXProps(astTokens, i + 2);
@@ -229,7 +237,6 @@ const ASTParser = {
           parentNode,
           childNodes
         );
-
         // Case for finding components passed in as props e.g. <Route component={App} />
       } else if (
         astTokens[i].type.label === "jsxName" &&
@@ -246,8 +253,23 @@ const ASTParser = {
           childNodes
         );
       }
+      // else if (
+      //   astTokens[i].type.label === "jsxName" &&
+      //   astTokens[i - 1].type.label === "jsxName"
+      // ) {
+      //   token = astTokens[i];
+      //   console.log("SaplingParser.ts-258: token", token);
+      //   console.log("SaplingParser.ts-258: token", astTokens[i - 1]);
+      //   childNodes = ASTParser.getChildNodes(
+      //     imports,
+      //     token,
+      //     props,
+      //     parentNode,
+      //     childNodes
+      //   );
+      // }
     }
-
+    console.log("SaplingParser.ts-267: ", childNodes);
     return Object.values(childNodes);
   },
 
@@ -255,9 +277,10 @@ const ASTParser = {
     astTokens: Token[],
     imports: Record<string, ImportData>,
     parentNode: Tree
-  ): Token[] {
+  ): Tree[] {
     let props: Record<string, boolean> = {};
-    let tokens: Token[] = [];
+    let token: Token;
+    let childNodes: Record<string, Tree> = {};
     for (let i = 0; i < astTokens.length; i++) {
       //check if the token is a hook
 
@@ -266,11 +289,18 @@ const ASTParser = {
         astTokens[i].value.toString().startsWith("use") &&
         astTokens[i + 1].type.label === "("
       ) {
-        console.log("SaplingParser.ts-264: ", astTokens[i]);
-        tokens.push(astTokens[i]);
+        token = astTokens[i];
+
+        childNodes = ASTParser.getChildNodes(
+          imports,
+          token,
+          props,
+          parentNode,
+          childNodes
+        );
       }
     }
-    return tokens;
+    return Object.values(childNodes);
   },
   // Extracts prop names from a JSX element
   getJSXProps(astTokens: Token[], startLoc: number): Record<string, boolean> {
