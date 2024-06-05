@@ -253,23 +253,7 @@ const ASTParser = {
           childNodes
         );
       }
-      // else if (
-      //   astTokens[i].type.label === "jsxName" &&
-      //   astTokens[i - 1].type.label === "jsxName"
-      // ) {
-      //   token = astTokens[i];
-      //   console.log("SaplingParser.ts-258: token", token);
-      //   console.log("SaplingParser.ts-258: token", astTokens[i - 1]);
-      //   childNodes = ASTParser.getChildNodes(
-      //     imports,
-      //     token,
-      //     props,
-      //     parentNode,
-      //     childNodes
-      //   );
-      // }
     }
-    console.log("SaplingParser.ts-267: ", childNodes);
     return Object.values(childNodes);
   },
 
