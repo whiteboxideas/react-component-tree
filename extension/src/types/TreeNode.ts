@@ -10,6 +10,7 @@ export interface IRawNode {
   redux: boolean;
   thirdParty: boolean;
   filePath: string;
+  importPath: string;
 }
 
 export interface INode extends IRawNode {

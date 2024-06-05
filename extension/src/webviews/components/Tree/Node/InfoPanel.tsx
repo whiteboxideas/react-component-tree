@@ -37,7 +37,6 @@ const InfoPanel: React.FC<IProps> = ({ node }: IProps) => {
   }, [node.filePath, node?.parentList[0]]);
 
   const isHook = React.useMemo(() => {
-    console.log("InfoPanel.tsx-42: ", node.name.toString().startsWith("use"));
     return node.name.toString().startsWith("use");
   }, [node.name]);
   return (

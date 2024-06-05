@@ -35,6 +35,14 @@ const Node: React.FC<ListChildComponentProps<INode[]>> = ({
   const isNodeLocal = React.useMemo(() => {
     return node.filePath === node?.parentList[0];
   }, [node.filePath, node?.parentList[0]]);
+  const isFromReact = React.useMemo(() => {
+    console.log("Node.tsx-39: node", node);
+    console.log(
+      'Node.tsx-39: node.importPath.includes("react")',
+      node.importPath.includes("react")
+    );
+    return node.importPath.includes("react");
+  }, [node.importPath]);
   return (
     <div
       ref={nodeRef}
@@ -60,7 +68,7 @@ const Node: React.FC<ListChildComponentProps<INode[]>> = ({
           title='Navigates to that file'
           className={`node-label ${node.thirdParty ? "third-party" : ""} ${
             isNodeLocal ? "local-component" : ""
-          }`}
+          } ${isFromReact ? "react-component" : ""}`}
         >
           {node.name}
         </span>

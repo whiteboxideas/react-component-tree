@@ -96,7 +96,10 @@
 .node_error {
   color: var(--vscode-editorError-foreground);
 }
-.local-component {
+.local_component {
+  color: var(--vscode-editorError-foreground);
+}
+.react-component {
   color: var(--vscode-focusBorder);
 }
 .node_icons {
