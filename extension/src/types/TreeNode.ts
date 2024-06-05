@@ -3,6 +3,7 @@ export interface IRawNode {
   name: string;
   parent: INode;
   children: INode[];
+  parentList: string[];
   error: string;
   props: Record<string, any>;
   expanded: boolean;
