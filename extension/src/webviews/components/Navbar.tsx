@@ -24,36 +24,44 @@ const Navbar = ({ rootFile }: any) => {
     }
   };
 
-  const expandAll =() => 
+  const expandAll = () =>
     renderProvider.setGridExpandedState(ExpandedState.EXPANDED);
 
-  const collapseAll =() => 
+  const collapseAll = () =>
     renderProvider.setGridExpandedState(ExpandedState.COLLAPSED);
 
   // Render section
   return (
-    <div className="navbar">
+    <div className='navbar'>
       <input
-        type="file"
-        name="file"
-        id="file"
-        className="inputfile"
-        onChange={(e) => {
+        type='file'
+        name='file'
+        id='file'
+        className='inputfile'
+        onChange={(e) => {
           fileMessage(e);
         }}
       />
-      <label htmlFor="file">
+      {/* <label htmlFor='file'>
         <FontAwesomeIcon icon={faDownload} />
-        <strong id="strong_file">
+        <strong id='strong_file'>
           {rootFile ? ` ${rootFile}` : " Choose a file..."}
         </strong>
-      </label>
+      </label> */}
       <div className='expand-collapse-buttons'>
         <span>
-          <FontAwesomeIcon title="Expand All" icon={faExpandAlt} onClick={expandAll} />
+          <FontAwesomeIcon
+            title='Expand All'
+            icon={faExpandAlt}
+            onClick={expandAll}
+          />
         </span>
         <span>
-          <FontAwesomeIcon title="Collapse All" icon={faCompressAlt} onClick={collapseAll}/>
+          <FontAwesomeIcon
+            title='Collapse All'
+            icon={faCompressAlt}
+            onClick={collapseAll}
+          />
         </span>
       </div>
     </div>
