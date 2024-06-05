@@ -36,11 +36,6 @@ const Node: React.FC<ListChildComponentProps<INode[]>> = ({
     return node.filePath === node?.parentList[0];
   }, [node.filePath, node?.parentList[0]]);
   const isFromReact = React.useMemo(() => {
-    console.log("Node.tsx-39: node", node);
-    console.log(
-      'Node.tsx-39: node.importPath.includes("react")',
-      node.importPath.includes("react")
-    );
     return node.importPath.includes("react");
   }, [node.importPath]);
   return (

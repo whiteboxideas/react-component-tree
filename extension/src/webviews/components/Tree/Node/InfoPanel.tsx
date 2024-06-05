@@ -39,6 +39,10 @@ const InfoPanel: React.FC<IProps> = ({ node }: IProps) => {
   const isHook = React.useMemo(() => {
     return node.name.toString().startsWith("use");
   }, [node.name]);
+  const isFromReact = React.useMemo(() => {
+    console.log("InfoPanel.tsx-43: node", node);
+    return node.importPath.includes("react");
+  }, [node.importPath]);
   return (
     <>
       {node.redux ? (
@@ -70,7 +74,7 @@ const InfoPanel: React.FC<IProps> = ({ node }: IProps) => {
           </span>
         </Tippy>
       )}
-      {nodeIsLocal && (
+      {nodeIsLocal && !isFromReact && (
         <Tippy
           content={
             <p>
