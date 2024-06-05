@@ -252,6 +252,20 @@ const ASTParser = {
           parentNode,
           childNodes
         );
+      } else if (
+        astTokens[i].type.label === "name" &&
+        astTokens[i].value.toString().startsWith("use") &&
+        astTokens[i + 1].type.label === "("
+      ) {
+        token = astTokens[i];
+
+        childNodes = ASTParser.getChildNodes(
+          imports,
+          token,
+          props,
+          parentNode,
+          childNodes
+        );
       }
     }
     return Object.values(childNodes);

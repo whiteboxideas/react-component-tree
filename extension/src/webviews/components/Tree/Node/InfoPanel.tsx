@@ -3,7 +3,12 @@ import { Fragment } from "react";
 
 // imports for the icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStore, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faStore,
+  faInfoCircle,
+  faFish,
+  faQrcode,
+} from "@fortawesome/free-solid-svg-icons";
 // imports for the tooltip
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
@@ -28,15 +33,13 @@ const InfoPanel: React.FC<IProps> = ({ node }: IProps) => {
   // Variable that holds the props that will be fed into the tooltip (Tippy)
   const propsList = propsGenerator();
   const nodeIsLocal = React.useMemo(() => {
-    console.log(
-      "Node.tssssx-38: ",
-      node,
-      node.filePath,
-      node?.parentList[0],
-      node.filePath === node?.parentList[0]
-    );
     return node.filePath === node?.parentList[0];
   }, [node.filePath, node?.parentList[0]]);
+
+  const isHook = React.useMemo(() => {
+    console.log("InfoPanel.tsx-42: ", node.name.toString().startsWith("use"));
+    return node.name.toString().startsWith("use");
+  }, [node.name]);
   return (
     <>
       {node.redux ? (
@@ -78,6 +81,19 @@ const InfoPanel: React.FC<IProps> = ({ node }: IProps) => {
         >
           <span className='node_icons_warning'>
             <FontAwesomeIcon icon={faInfoCircle} />
+          </span>
+        </Tippy>
+      )}
+      {isHook ? (
+        <Tippy content={<p>a hook</p>}>
+          <span className='node_icons_warning'>
+            <FontAwesomeIcon icon={faFish} />
+          </span>
+        </Tippy>
+      ) : (
+        <Tippy content={<p>a component</p>}>
+          <span className='node_icons_warning'>
+            <FontAwesomeIcon icon={faQrcode} />
           </span>
         </Tippy>
       )}
