@@ -97,6 +97,9 @@ export default class RenderProvider {
     }
 
     function isNodeEligible(node: INode) {
+      if (!node) {
+        return false;
+      }
       if (!settings?.thirdParty) {
         return !node?.thirdParty;
       }
@@ -107,7 +110,7 @@ export default class RenderProvider {
   getProcessedNode = (node: any) => {
     return {
       ...node,
-      depth: node.depth,
+      depth: node?.depth || 0,
       expanded: this.isRowExpanded(node),
       children: [],
     };
