@@ -38,10 +38,11 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         "react-component-tree"
       );
       // Send a message back to the webview with the data on settings
-      await webviewView.webview.postMessage({
-        type: "settings-data",
-        value: settings.view,
-      });
+      if (settings.view)
+        await webviewView.webview.postMessage({
+          type: "settings-data",
+          value: settings.view,
+        });
     });
 
     vscode.window.onDidChangeActiveTextEditor(async (e) => {
