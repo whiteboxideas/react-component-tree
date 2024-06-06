@@ -177,6 +177,7 @@ const ASTParser = {
     parent: Tree,
     children: Record<string, Tree>
   ): Record<string, Tree> {
+    const ast = astToken;
     const childNodes = { ...children };
     const currentNode = children[astToken.value];
     let filePath = parent.filePath;
@@ -196,6 +197,7 @@ const ASTParser = {
       }
       // Add tree node to childNodes if one does not exist
       childNodes[astToken.value] = new Tree({
+        ast,
         name,
         fileName: path.basename(filePath),
         filePath,
@@ -285,6 +287,7 @@ const ASTParser = {
       if (
         astTokens[i].type.label === "name" &&
         astTokens[i].value.toString().startsWith("use") &&
+        astTokens[i].value.toString() !== "use" &&
         astTokens[i + 1].type.label === "("
       ) {
         token = astTokens[i];
@@ -298,6 +301,7 @@ const ASTParser = {
         );
       }
     }
+    console.log("SaplingParser.ts-302: ", childNodes);
     return Object.values(childNodes);
   },
   // Extracts prop names from a JSX element

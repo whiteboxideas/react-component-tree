@@ -3,6 +3,7 @@ import { INode, IRawNode, Token } from "./types";
 import { SaplingParser } from "./SaplingParser";
 
 export class Tree implements IRawNode, INode {
+  ast: any;
   index: number;
   id: string;
   name: string;
@@ -27,6 +28,7 @@ export class Tree implements IRawNode, INode {
     | string;
 
   constructor(node?: Partial<Tree>) {
+    this.ast = node.ast;
     this.id = getNonce(); // shallow copies made from constructor do not share identifiers
     this.name = node?.name ?? "";
     this.fileName = node?.fileName ?? "";

@@ -1,5 +1,6 @@
 export interface IRawNode {
   id: string;
+  ast: any;
   name: string;
   parent: INode;
   children: INode[];

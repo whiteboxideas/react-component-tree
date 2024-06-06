@@ -38,11 +38,12 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         "react-component-tree"
       );
       // Send a message back to the webview with the data on settings
-      if (settings.view)
+      if (settings.view) {
         await webviewView.webview.postMessage({
           type: "settings-data",
           value: settings.view,
         });
+      }
     });
 
     vscode.window.onDidChangeActiveTextEditor(async (e) => {
@@ -77,6 +78,22 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         case "goBack": {
           await vscode.commands.executeCommand("workbench.action.navigateBack");
 
+          break;
+        }
+        case "goToLine": {
+          console.log("SidebarProvider.ts-83: ", data.value);
+          // await vscode.commands.executeCommand(
+          //   "workbench.action.gotoLine",
+          //   data.value
+          // );
+          const editor = vscode.window.activeTextEditor;
+          if (editor) {
+            const line = data.value;
+            let range = editor.document.lineAt(line - 1).range;
+            editor.selection = new vscode.Selection(range.start, range.end);
+            editor.revealRange(range);
+          }
+          break;
           break;
         }
 

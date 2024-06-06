@@ -152,6 +152,12 @@ export default class RenderProvider {
   }
 
   visitNode(node: INode) {
+    if (node.thirdParty) {
+      vscodeApi.postMessage({
+        type: "goToLine",
+        value: node.ast.loc.start.line,
+      });
+    }
     if (!node.thirdParty) {
       this.dispatch({
         type: ACTIONS.UPDATE_ACTIVE_NODE,
