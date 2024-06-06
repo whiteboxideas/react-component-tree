@@ -4,7 +4,11 @@ import * as ReactDOM from "react-dom";
 
 // imports for the icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBackward,
+  faDownload,
+  faForward,
+} from "@fortawesome/free-solid-svg-icons";
 import { faExpandAlt } from "@fortawesome/free-solid-svg-icons";
 import { faCompressAlt } from "@fortawesome/free-solid-svg-icons";
 import { renderProvider } from "../pages/sidebar";
@@ -22,6 +26,12 @@ const Navbar = ({ rootFile }: any) => {
         value: filePath,
       });
     }
+  };
+
+  const goBack = () => {
+    vscodeApi.postMessage({
+      type: "goBack",
+    });
   };
 
   const expandAll = () =>
@@ -49,6 +59,9 @@ const Navbar = ({ rootFile }: any) => {
         </strong>
       </label> */}
       <div className='expand-collapse-buttons'>
+        <span>
+          <FontAwesomeIcon title='Back' icon={faBackward} onClick={goBack} />
+        </span>
         <span>
           <FontAwesomeIcon
             title='Expand All'

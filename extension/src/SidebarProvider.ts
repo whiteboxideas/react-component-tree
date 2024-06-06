@@ -73,6 +73,12 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
       // Switch cases based on the type sent as a message
       switch (data.type) {
         // Case when the user selects a file to begin a tree
+        case "goBack": {
+          await vscode.commands.executeCommand("workbench.action.navigateBack");
+
+          break;
+        }
+
         case "onFile": {
           if (!data.value) {
             return;
