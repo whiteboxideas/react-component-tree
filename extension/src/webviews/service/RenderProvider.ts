@@ -110,7 +110,7 @@ export default class RenderProvider {
   getProcessedNode = (node: any) => {
     return {
       ...node,
-      depth: node?.depth || 0,
+      depth: node.depth,
       expanded: this.isRowExpanded(node),
       children: [],
     };
