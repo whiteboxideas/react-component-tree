@@ -40,7 +40,6 @@ const InfoPanel: React.FC<IProps> = ({ node }: IProps) => {
     return node.name.toString().startsWith("use");
   }, [node.name]);
   const isFromReact = React.useMemo(() => {
-    console.log("InfoPanel.tsx-43: node", node);
     return node.importPath.includes("react");
   }, [node.importPath]);
   return (
