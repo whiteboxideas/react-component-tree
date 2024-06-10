@@ -1,146 +1,146 @@
 {
-	"name": "react-component-tree",
-	"displayName": "React component tree",
-	"description": "React Component Hierarchy Visualizer",
-	"repository": "https://github.com/hb1998/react-component-tree",
-	"icon": "media/logo-128px.png",
-	"publisher": "HabeebArul",
-	"version": "1.1.1",
-	"engines": {
-		"vscode": "^1.60.0"
-	},
-	"categories": [
-		"Visualization"
-	],
-	"keywords": [
-		"react",
-		"component hierarchy",
-		"devtools"
-	],
-	"activationEvents": [
-		"onStartupFinished"
-	],
-	"main": "./dist/extension.js",
-	"contributes": {
-		"viewsContainers": {
-			"activitybar": [
-				{
-					"id": "react-component-tree",
-					"title": "React Branches",
-					"icon": "media/list-tree.svg"
-				}
-			]
-		},
-		"views": {
-			"react-component-tree": [
-				{
-					"type": "webview",
-					"id": "react-component-tree",
-					"name": "React Branches",
-					"icon": "media/list-tree.svg",
-					"contextualTitle": "react-component-tree"
-				}
-			]
-		},
-		"commands": [
-			{
-				"command": "rct.refresh",
-				"category": "React Branches",
-				"title": "Refresh"
-			},
-			{
-				"command": "rct.generateTree",
-				"category": "React Branches",
-				"title": "Generate Tree"
-			}
-		],
-		"menus": {
-			"commandPalette": [
-				{
-					"command": "rct.generateTree",
-					"when": "resourceLangId == javascript || resourceLangId == javascriptreact || resourceLangId == typescript || resourceLangId == typescriptreact"
-				}
-			],
-			"explorer/context": [
-				{
-					"when": "resourceLangId == javascript || resourceLangId == javascriptreact || resourceLangId == typescript || resourceLangId == typescriptreact",
-					"command": "rct.generateTree",
-					"group": "rct"
-				}
-			]
-		},
-		"configuration": {
-			"title": "React component tree",
-			"properties": {
-				"rct.view.thirdParty": {
-					"type": "boolean",
-					"default": true,
-					"description": "Show Third Party components in the tree view."
-				},
-				"rct.view.reactRouter": {
-					"type": "boolean",
-					"default": true,
-					"description": "Show React Router components in the tree view."
-				}
-			}
-		}
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run package",
-		"build": "npm-run-all -p build:*",
-		"build:extension": "webpack --mode production",
-		"build:sidebar": "webpack --config ./src/webviews/webpack.views.config.js",
-		"watch": "npm-run-all -p watch:*",
-		"watch:extension": "webpack --watch",
-		"watch:sidebar": "webpack --watch --config ./src/webviews/webpack.views.config.js",
-		"package": "webpack --mode production --devtool hidden-source-map && webpack --config ./src/webviews/webpack.views.config.js --devtool hidden-source-map",
-		"test-compile": "tsc -p ./",
-		"test-watch": "tsc -watch -p ./",
-		"pretest": "npm run test-compile && npm run lint",
-		"lint": "eslint src --ext ts",
-		"test": "node ./out/test/runTest.js",
-		"test-mocha": "npm run pretest && npx mocha out/test/suite/parser.test.js"
-	},
-	"devDependencies": {
-		"@babel/parser": "^7.15.7",
-		"@babel/types": "^7.15.6",
-		"@testing-library/react": "^12.1.0",
-		"@types/chai": "^4.2.22",
-		"@types/glob": "^7.1.3",
-		"@types/jsdom": "^16.2.13",
-		"@types/mocha": "^8.2.2",
-		"@types/node": "14.x",
-		"@types/react": "^17.0.21",
-		"@types/react-dom": "^17.0.9",
-		"@types/vscode": "^1.60.0",
-		"@types/vscode-webview": "^1.57.0",
-		"@typescript-eslint/eslint-plugin": "^4.26.0",
-		"@typescript-eslint/parser": "^4.26.0",
-		"chai": "^4.3.4",
-		"css-loader": "^6.2.0",
-		"eslint": "^7.27.0",
-		"glob": "^7.1.7",
-		"global-jsdom": "^8.2.0",
-		"jsdom": "^17.0.0",
-		"mocha": "^8.4.0",
-		"npm-run-all": "^4.1.5",
-		"style-loader": "^3.2.1",
-		"ts-loader": "^9.2.2",
-		"typescript": "^4.3.2",
-		"vscode-test": "^1.5.2",
-		"webpack": "^5.38.1",
-		"webpack-cli": "^4.7.0"
-	},
-	"dependencies": {
-		"@fortawesome/fontawesome-svg-core": "^1.2.36",
-		"@fortawesome/free-solid-svg-icons": "^5.15.4",
-		"@fortawesome/react-fontawesome": "^0.1.15",
-		"@tippy.js/react": "^3.1.1",
-		"@types/react-window": "^1.8.5",
-		"classnames": "^2.3.2",
-		"pubsub-js": "^1.9.4",
-		"react": "^17.0.2",
-		"react-dom": "^17.0.2",
-		"react-window": "^1.8.8"
-	}
+  "name": "react-component-tree",
+  "displayName": "React Branches",
+  "description": "React Component Hierarchy Visualizer",
+  "repository": "https://github.com/hb1998/react-component-tree",
+  "icon": "media/logo-128px.png",
+  "publisher": "WBI",
+  "version": "0.0.2",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Visualization"
+  ],
+  "keywords": [
+    "react",
+    "component hierarchy",
+    "devtools"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "react-component-tree",
+          "title": "React Branches",
+          "icon": "media/list-tree.svg"
+        }
+      ]
+    },
+    "views": {
+      "react-component-tree": [
+        {
+          "type": "webview",
+          "id": "react-component-tree",
+          "name": "React Branches",
+          "icon": "media/list-tree.svg",
+          "contextualTitle": "react-component-tree"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "rct.refresh",
+        "category": "React Branches",
+        "title": "Refresh"
+      },
+      {
+        "command": "rct.generateTree",
+        "category": "React Branches",
+        "title": "Generate Tree"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "rct.generateTree",
+          "when": "resourceLangId == javascript || resourceLangId == javascriptreact || resourceLangId == typescript || resourceLangId == typescriptreact"
+        }
+      ],
+      "explorer/context": [
+        {
+          "when": "resourceLangId == javascript || resourceLangId == javascriptreact || resourceLangId == typescript || resourceLangId == typescriptreact",
+          "command": "rct.generateTree",
+          "group": "rct"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "React component tree",
+      "properties": {
+        "rct.view.thirdParty": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show Third Party components in the tree view."
+        },
+        "rct.view.reactRouter": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show React Router components in the tree view."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "build": "npm-run-all -p build:*",
+    "build:extension": "webpack --mode production",
+    "build:sidebar": "webpack --config ./src/webviews/webpack.views.config.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:extension": "webpack --watch",
+    "watch:sidebar": "webpack --watch --config ./src/webviews/webpack.views.config.js",
+    "package": "webpack --mode production --devtool hidden-source-map && webpack --config ./src/webviews/webpack.views.config.js --devtool hidden-source-map",
+    "test-compile": "tsc -p ./",
+    "test-watch": "tsc -watch -p ./",
+    "pretest": "npm run test-compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "test-mocha": "npm run pretest && npx mocha out/test/suite/parser.test.js"
+  },
+  "devDependencies": {
+    "@babel/parser": "^7.15.7",
+    "@babel/types": "^7.15.6",
+    "@testing-library/react": "^12.1.0",
+    "@types/chai": "^4.2.22",
+    "@types/glob": "^7.1.3",
+    "@types/jsdom": "^16.2.13",
+    "@types/mocha": "^8.2.2",
+    "@types/node": "14.x",
+    "@types/react": "^17.0.21",
+    "@types/react-dom": "^17.0.9",
+    "@types/vscode": "^1.60.0",
+    "@types/vscode-webview": "^1.57.0",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "chai": "^4.3.4",
+    "css-loader": "^6.2.0",
+    "eslint": "^7.27.0",
+    "glob": "^7.1.7",
+    "global-jsdom": "^8.2.0",
+    "jsdom": "^17.0.0",
+    "mocha": "^8.4.0",
+    "npm-run-all": "^4.1.5",
+    "style-loader": "^3.2.1",
+    "ts-loader": "^9.2.2",
+    "typescript": "^4.3.2",
+    "vscode-test": "^1.5.2",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.15",
+    "@tippy.js/react": "^3.1.1",
+    "@types/react-window": "^1.8.5",
+    "classnames": "^2.3.2",
+    "pubsub-js": "^1.9.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-window": "^1.8.8"
+  }
 }
