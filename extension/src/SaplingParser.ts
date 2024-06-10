@@ -301,7 +301,6 @@ const ASTParser = {
         );
       }
     }
-    console.log("SaplingParser.ts-302: ", childNodes);
     return Object.values(childNodes);
   },
   // Extracts prop names from a JSX element

@@ -81,7 +81,6 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           break;
         }
         case "goToLine": {
-          console.log("SidebarProvider.ts-83: ", data.value);
           // await vscode.commands.executeCommand(
           //   "workbench.action.gotoLine",
           //   data.value
@@ -93,7 +92,6 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
             editor.selection = new vscode.Selection(range.start, range.end);
             editor.revealRange(range);
           }
-          break;
           break;
         }
 
