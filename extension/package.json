@@ -18,12 +18,13 @@
     "devtools"
   ],
   "activationEvents": [
-    "onStartupFinished"
+    "onStartupFinished",
+    "onLanguage:javascript"
   ],
   "main": "./dist/extension.js",
   "contributes": {
     "viewsContainers": {
-      "activitybar": [
+      "explorer": [
         {
           "id": "react-component-tree",
           "title": "React Branches",
@@ -38,7 +39,7 @@
           "id": "react-component-tree",
           "name": "React Branches",
           "icon": "media/list-tree.svg",
-          "contextualTitle": "react-component-tree"
+          "contextualTitle": "React Branches"
         }
       ]
     },

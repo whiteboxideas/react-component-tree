@@ -156,6 +156,7 @@ export default class RenderProvider {
       vscodeApi.postMessage({
         type: "goToLine",
         value: node.ast.loc.start.line,
+        extra: node,
       });
     }
     if (!node.thirdParty) {
@@ -167,6 +168,7 @@ export default class RenderProvider {
         vscodeApi.postMessage({
           type: "onViewFile",
           value: node.filePath,
+          extra: node,
         });
       }
     }

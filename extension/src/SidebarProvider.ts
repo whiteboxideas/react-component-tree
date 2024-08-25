@@ -100,13 +100,30 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
             return;
           }
           // Generate tree with SaplingParser
+          console.log("SidebarProvider.ts-103: this.tree", this.tree);
           this.tree = SaplingParser.parse(data.value);
+          console.log("SidebarProvider.ts-105: this.tree", this.tree);
           await this.updateView();
           break;
         }
 
         // Case when clicking on tree to open file
         case "onViewFile": {
+          let name = data.extra.name;
+          let token = data.extra.ast.tokens.find(
+            (token) => token.value === name
+          );
+          let uri = vscode.Uri.file(data.extra.filePath); // replace with your file path
+          let position = new vscode.Position(
+            token.loc.start.line,
+            token.loc.start.line
+          ); // replace with the position of the symbol
+          vscode.commands
+            .executeCommand("vscode.executeReferenceProvider", uri, position)
+            .then((locations) => {
+              console.log("SidebarProvider.ts-127: ", locations);
+            });
+
           if (!data.value) {
             return;
           }

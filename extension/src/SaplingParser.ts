@@ -37,6 +37,7 @@ export class SaplingParser {
       const entryFile = ParserHelpers.processFilePath(input);
       // Create root Tree node
       const root = new Tree({
+        ast: "null",
         name: path.basename(entryFile).replace(/\.[jt]sx?$/, ""),
         fileName: path.basename(entryFile),
         filePath: entryFile,
@@ -151,7 +152,7 @@ const ASTParser = {
 
       // Find imports in the current file, then find child components in the current file
       const imports = ImportParser.parse(ast.program.body);
-
+      componentTree.set("ast", ast);
       // Get any JSX Children of current file:
       componentTree.set(
         "children",

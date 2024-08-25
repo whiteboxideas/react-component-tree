@@ -56,7 +56,9 @@ export class Tree implements IRawNode, INode {
    */
   public set(key: keyof Tree, value: Tree[keyof Tree]): void {
     if (
-      ["count", "thirdParty", "reactRouter", "redux", "error"].includes(key)
+      ["count", "thirdParty", "reactRouter", "redux", "error", "ast"].includes(
+        key
+      )
     ) {
       this[String(key)] = value;
     } else if (key === "children") {
